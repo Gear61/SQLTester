@@ -42,7 +42,7 @@ public class Schema
 	// Example: SALARIES (Professor_Name (TEXT), Department (TEXT), SALARY (INT))
 	public String description()
 	{
-		String description = "Our Table: " + tableName + " (";
+		String description = tableName + " (";
 		for (int i = 0; i < columns.length; i++)
 		{
 			description += columns[i].getRowName() + " (" + columns[i].getDataType() + ")";

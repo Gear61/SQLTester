@@ -6,11 +6,30 @@
     android:layout_marginRight="10dp">
     
     <TextView
-        android:id="@+id/table_design"
+        android:id="@+id/question_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:textStyle="bold"/>
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/table_design"
+        android:layout_marginLeft="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/our_table"
+        android:layout_alignTop="@+id/our_table"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/our_table"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/question_number"
+        android:text="@string/our_table"
+        android:textStyle="bold" />
     
     <TextView
 	    android:id="@+id/problem"

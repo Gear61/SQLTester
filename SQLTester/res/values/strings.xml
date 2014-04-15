@@ -3,7 +3,12 @@
 
     <!-- Question List View -->
     <string name="welcome">Simply click on a question to get started!</string>
+    <string name="our_table">Our Table:</string>
     <string name="completion_status">Completion Status of Question</string>
+    
+    <!-- Question Menu -->
+    <string name="back_arrow">Return to the previous question</string>
+    <string name="forward_arrow">Advance to the next question</string>
     
     <!-- Query Submission Form -->
     <string name="question_activity_display_message">Question Prompt</string>
