@@ -30,6 +30,7 @@ public class QuestionActivity extends Activity
 	// Menu items, don't want to find multiple times
 	MenuItem backward;
 	MenuItem forward;
+	MenuItem placeholder;
 	
 	public boolean killKeyboard()
 	{
@@ -98,28 +99,32 @@ public class QuestionActivity extends Activity
 		getMenuInflater().inflate(R.menu.question_menu, menu);
 		backward = menu.findItem(R.id.backward);
 		forward = menu.findItem(R.id.forward);
+		placeholder = menu.findItem(R.id.placeholder);
 		return true;
 	}
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu)
 	{
+		// No forward, last question
 		if (currentQuestion == (QuestionServer.getNumQuestions() - 1))
 		{
 			forward.setVisible(false);
+			backward.setVisible(true);
+			placeholder.setVisible(true);
 		}
-		else
+		// No backward, first question
+		else if (currentQuestion == 0)
 		{
 			forward.setVisible(true);
-		}
-		
-		if (currentQuestion == 0)
-		{
 			backward.setVisible(false);
+			placeholder.setVisible(true);
 		}
-		else
+		else // Disable placeholder
 		{
+			forward.setVisible(true);
 			backward.setVisible(true);
+			placeholder.setVisible(false);
 		}
 		super.onPrepareOptionsMenu(menu);
 		return true;
@@ -147,3 +152,4 @@ public class QuestionActivity extends Activity
 		return super.onOptionsItemSelected(item);
 	}
 }
+

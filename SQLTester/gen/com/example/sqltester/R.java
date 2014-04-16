@@ -32,8 +32,9 @@ public final class R {
         public static final int action_settings=0x7f08000b;
         public static final int backward=0x7f08000c;
         public static final int completion_status=0x7f080008;
-        public static final int forward=0x7f08000d;
+        public static final int forward=0x7f08000e;
         public static final int our_table=0x7f080003;
+        public static final int placeholder=0x7f08000d;
         public static final int problem=0x7f080004;
         public static final int query_entry=0x7f080007;
         public static final int questionList=0x7f08000a;
