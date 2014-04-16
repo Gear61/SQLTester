@@ -23,7 +23,14 @@ public class AnswerCheckerActivity extends Activity
 		questionNum = intent.getIntExtra("QUESTION_NUM", 0);
 		userQuery = intent.getStringExtra("USER_QUERY");
 		AnswerChecker mrAnswer = new AnswerChecker(context);
-		mrAnswer.checkAnswer(questionNum, userQuery);
+		if (mrAnswer.checkAnswer(questionNum, userQuery))
+		{
+			System.out.println("HAM");
+		}
+		else
+		{
+			System.out.println("HERM");
+		}
 	}
 
 	@Override

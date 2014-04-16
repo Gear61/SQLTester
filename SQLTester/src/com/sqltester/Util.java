@@ -1,0 +1,39 @@
+package com.sqltester;
+
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.text.Html;
+
+public class Util
+{
+	public static void showDialog(String message, Context context)
+	{
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+		// Set dialog message
+		alertDialogBuilder.setMessage(Html.fromHtml(message)).setCancelable(false)
+				.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int id)
+					{
+						dialog.cancel();
+					}
+				});
+
+		// Create alert dialog and show it
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
+	}
+	
+	@SuppressLint("DefaultLocale")
+	public static boolean validSELECT(String query)
+	{
+		if (!(query.split(" ")[0].toLowerCase().equals("select")))
+		{
+			return false;
+		}
+		return true;
+	}
+}

@@ -25,9 +25,11 @@ public class QueryACAdapter extends ArrayAdapter<String>
 	private Context context;
 	
 	// SQLite constructs
-	private static ArrayList<String> items = new ArrayList<String>
-    		(Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
-    					   "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS"));
+	private static ArrayList<String> items = new ArrayList<String>();
+	
+	private ArrayList<String> constants = new ArrayList<String>
+			(Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
+			   "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS"));
 	
     private ArrayList<String> itemsAll;
     private ArrayList<String> suggestions;
@@ -44,7 +46,16 @@ public class QueryACAdapter extends ArrayAdapter<String>
     	
     	setUpAC();
     	setProgressTracker();
+    	addConstants();
     	addTableInformation();
+    }
+    
+    private void addConstants()
+    {
+    	for (int i = 0; i < constants.size(); i++)
+    	{
+    		items.add(constants.get(i));
+    	}
     }
     
     @SuppressWarnings("unchecked")
@@ -157,7 +168,7 @@ public class QueryACAdapter extends ArrayAdapter<String>
                 String target = pieces[pieces.length - 1];
                 for (int i = 0, j = 0; i < itemsAll.size() && j <= 10; i++)
                 {
-                    if (itemsAll.get(i).toString().toLowerCase().startsWith((target.toLowerCase()))
+                    if (itemsAll.get(i).toString().toLowerCase().contains((target.toLowerCase()))
                     	&& !itemsAll.get(i).toString().toLowerCase().equals(target.toLowerCase())
                     	&& !suggestions.contains(itemsAll.get(i)))
                     {

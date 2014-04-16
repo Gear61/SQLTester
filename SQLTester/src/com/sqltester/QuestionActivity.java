@@ -20,18 +20,18 @@ public class QuestionActivity extends Activity
 	final Context context = this;
 	SchemaServer m_SS = SchemaServer.getSchemaServer();
 	int currentQuestion;
-	
+
 	// Question form views
 	TextView questionNumber;
 	TextView tableDesign;
 	TextView questionPrompt;
 	AutoCompleteTextView queryHelper;
-	
+
 	// Menu items, don't want to find multiple times
 	MenuItem backward;
 	MenuItem forward;
 	MenuItem placeholder;
-	
+
 	public boolean killKeyboard()
 	{
 		View view = this.getWindow().getDecorView().findViewById(android.R.id.content);
@@ -41,54 +41,66 @@ public class QuestionActivity extends Activity
 		int heightDiff = view.getRootView().getHeight() - (r.bottom - r.top);
 		if (heightDiff > 100)
 		{
-			InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-			inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+			InputMethodManager inputManager = (InputMethodManager) context
+					.getSystemService(Context.INPUT_METHOD_SERVICE);
+			inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),
+					InputMethodManager.HIDE_NOT_ALWAYS);
 		}
 		return false;
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.question_form);
-		
+
 		Intent intent = getIntent();
 		int questionNum = intent.getIntExtra("QUESTION_NUM", 0);
 		currentQuestion = questionNum;
-		
+
 		questionNumber = (TextView) findViewById(R.id.question_number);
 		tableDesign = (TextView) findViewById(R.id.table_design);
 		questionPrompt = (TextView) findViewById(R.id.problem);
-		queryHelper = (AutoCompleteTextView)findViewById(R.id.query_entry);
-		
+		queryHelper = (AutoCompleteTextView) findViewById(R.id.query_entry);
+
 		setUpQuestion();
 	}
-	
-	public void checkAnswer(View view) {
-		Intent intent = new Intent(context, AnswerCheckerActivity.class);
-	    intent.putExtra("QUESTION_NUM", currentQuestion);
-	    intent.putExtra("USER_QUERY", queryHelper.getText().toString());
-	    context.startActivity(intent);
+
+	public void checkAnswer(View view)
+	{
+		if (Util.validSELECT(queryHelper.getText().toString()))
+		{
+    		Intent intent = new Intent(context, AnswerCheckerActivity.class);
+    		intent.putExtra("QUESTION_NUM", currentQuestion);
+    		intent.putExtra("USER_QUERY", queryHelper.getText().toString());
+    		context.startActivity(intent);
+		}
+		else
+		{
+			Util.showDialog("Please enter a SELECT statement.", context);
+		}
 	}
-	
+
 	// Sets up a question given the number
 	private void setUpQuestion()
 	{
 		// Set up simple title
 		questionNumber.setText("Question #" + String.valueOf(currentQuestion + 1));
-		
+
 		// Get description of table we're supposed to use.
-		System.out.println(m_SS.serveTable(QuestionServer.getTableUsed(currentQuestion)).description());
-		tableDesign.setText(m_SS.serveTable(QuestionServer.getTableUsed(currentQuestion)).description());
-				
+		System.out.println(m_SS.serveTable(QuestionServer.getTableUsed(currentQuestion))
+				.description());
+		tableDesign.setText(m_SS.serveTable(QuestionServer.getTableUsed(currentQuestion))
+				.description());
+
 		// Load the problem
 		questionPrompt.setText(QuestionServer.getQuestion(currentQuestion));
-				
-		// Set up Auto Complete 
-		QueryACAdapter adapter = new QueryACAdapter(context, android.R.layout.simple_dropdown_item_1line,
-													m_SS.serveTable(QuestionServer.getTableUsed(currentQuestion)),
-													queryHelper);
+
+		// Set up Auto Complete
+		QueryACAdapter adapter = new QueryACAdapter(context,
+				android.R.layout.simple_dropdown_item_1line, m_SS.serveTable(QuestionServer
+						.getTableUsed(currentQuestion)), queryHelper);
 		queryHelper.setAdapter(adapter);
 	}
 
@@ -102,7 +114,7 @@ public class QuestionActivity extends Activity
 		placeholder = menu.findItem(R.id.placeholder);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu)
 	{
@@ -120,7 +132,8 @@ public class QuestionActivity extends Activity
 			backward.setVisible(false);
 			placeholder.setVisible(true);
 		}
-		else // Disable placeholder
+		else
+		// Disable placeholder
 		{
 			forward.setVisible(true);
 			backward.setVisible(true);
@@ -129,14 +142,15 @@ public class QuestionActivity extends Activity
 		super.onPrepareOptionsMenu(menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		killKeyboard();
 		switch (item.getItemId())
 		{
-			/* case android.R.id.home:
-				break; */
+		/*
+		 * case android.R.id.home: break;
+		 */
 			case R.id.backward:
 				currentQuestion--;
 				setUpQuestion();
@@ -152,4 +166,3 @@ public class QuestionActivity extends Activity
 		return super.onOptionsItemSelected(item);
 	}
 }
-
