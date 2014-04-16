@@ -33,6 +33,13 @@ public class MisterDataSource
 		open();
 		Cursor cursor = database.rawQuery(queryString, null);
 		int row = cursor.getCount(), col = cursor.getColumnCount();
+		
+		// If no data was gotten, return null
+		if (row == 0)
+		{
+			return null;
+		}
+		
 		String[][] ourData = new String[row][col];
 		int[] typeDict = new int[col];
 

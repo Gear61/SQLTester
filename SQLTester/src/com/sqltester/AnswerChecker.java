@@ -13,41 +13,48 @@ public class AnswerChecker
 		dataSource = new MisterDataSource(context);
 	}
 
-	public boolean checkAnswer(int questionNumber, String userQuery)
+	public ResponseBundle checkAnswer(int questionNumber, String userQuery)
 	{
+		// Get both results sets, set up wasCorrect. Innocent until proven guilty
 		String[][] userResult = dataSource.getData(userQuery);
-		
-		// HashSet to store the rows fetched by the users
-		HashSet <String> UserAnswers = new HashSet <String>();
-		for (int i = 0; i < userResult.length; i++)
-		{
-			// Have flying pie delimiters to separate our columns
-			String currentRow = "~~|}";
-			for (int j = 0; j < userResult[0].length; j++)
-			{
-				currentRow += (userResult[i][j] + "~~|}");
-			}
-			UserAnswers.add(currentRow);
-		}
-		
 		String[][] correctAnswers = dataSource.getData(AnswerServer.getAnswer(questionNumber));
-		if (userResult.length != correctAnswers.length)
-		{
-			return false;
-		}
+		Boolean wasCorrect = true;
 		
-		for (int i = 0; i < correctAnswers.length; i++)
+		// If their query actually returned something, we're in business
+		if (userResult != null)
 		{
-			String currentRow = "~~|}";
-			for (int j = 0; j < correctAnswers[0].length; j++)
-			{
-				currentRow += (correctAnswers[i][j] + "~~|}");
-			}
-			if (!UserAnswers.contains(currentRow))
-			{
-				return false;
-			}
+    		// HashSet to store the rows fetched by the users
+    		HashSet <String> UserAnswers = new HashSet <String>();
+    		for (int i = 0; i < userResult.length; i++)
+    		{
+    			// Have flying pie delimiters to separate our columns
+    			String currentRow = "~~|}";
+    			for (int j = 0; j < userResult[0].length; j++)
+    			{
+    				currentRow += (userResult[i][j] + "~~|}");
+    			}
+    			UserAnswers.add(currentRow);
+    		}
+    		
+    		// Make sure the result sets are of the same size
+    		if (userResult.length != correctAnswers.length)
+    		{
+    			wasCorrect = false;
+    		}
+    		
+    		for (int i = 0; i < correctAnswers.length; i++)
+    		{
+    			String currentRow = "~~|}";
+    			for (int j = 0; j < correctAnswers[0].length; j++)
+    			{
+    				currentRow += (correctAnswers[i][j] + "~~|}");
+    			}
+    			if (!UserAnswers.contains(currentRow))
+    			{
+    				wasCorrect = false;
+    			}
+    		}
 		}
-		return true;
+		return new ResponseBundle(wasCorrect, userResult, correctAnswers);
 	}
 }

@@ -203,6 +203,5 @@ public class QueryACAdapter extends ArrayAdapter<String>
             }
         }
     };
-
 }
 
