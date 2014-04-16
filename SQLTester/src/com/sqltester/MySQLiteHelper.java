@@ -11,19 +11,21 @@ public class MySQLiteHelper extends SQLiteOpenHelper
 	private static final int DATABASE_VERSION = 1;
 	private static SQLiteDatabase database;
 	
-	SchemaServer schemaServer = SchemaServer.getSchemaServer();
-	Schema[] allSchemas = schemaServer.serveAllTables();
+	SchemaServer schemaServer;
+	Schema[] allSchemas;
 	
 	public MySQLiteHelper(Context context)
 	{
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-		
+		schemaServer = SchemaServer.getSchemaServer();
+		allSchemas = schemaServer.serveAllTables();
 	}
 
 	// Create and populate table(s)
 	@Override
 	public void onCreate(SQLiteDatabase database)
 	{
+		System.out.println("HAM");
 		MySQLiteHelper.database = database;
 		// For each table that the SchemaServer gives us
 		for (int i = 0; i < allSchemas.length; i++)
@@ -31,12 +33,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper
 			database.execSQL(allSchemas[i].creationStatement());
 			String[] allInserts = allSchemas[i].insertStatements();
 			
-			// Run each of its corresponding inserts
-			for (int j = 0; j < allInserts.hashCode(); j++)
-			{
-				database.execSQL(allInserts[j]);
+			if (allInserts != null)
+    			{
+    			// Run each of its corresponding inserts
+    			for (int j = 0; j < allInserts.length; j++)
+    			{
+    				database.execSQL(allInserts[j]);
+    			}
 			}
 		}
+		System.out.println("HERM");
 	}
 	
 	public static SQLiteDatabase getConnection() {

@@ -4,7 +4,7 @@ public class RowServer
 {
 	// Database rows stored here in this ghetto hard-coded array
 	private static String[][][] rows = {
-											{{}},
+											{},
 											{{"Zaniolo", "Computer Science", "130000"},
     									  	{"Eggert", "Computer Science", "170000"},
     									  	{"Cho", "Computer Science", "150000"},

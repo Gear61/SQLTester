@@ -19,7 +19,7 @@ public class Schema
 		insertionTemplate = "INSERT INTO " + tableName + " (";
 		for (int i = 0; i < columns.length; i++)
 		{
-			insertionTemplate += columns[i];
+			insertionTemplate += columns[i].getRowName();
 			if (i != columns.length - 1)
 			{
 				insertionTemplate += ", "; 
@@ -77,6 +77,11 @@ public class Schema
 	// Returns an array of insertion statements to populate itself
 	public String[] insertStatements()
 	{
+		if (rows.length == 0)
+		{
+			return null;
+		}
+		
 		// Create array equal to # of rows we have
 		String[] inserts = new String[rows.length];
 		
@@ -87,7 +92,16 @@ public class Schema
 			inserts[i] = insertionTemplate;
 			for (int j = 0; j < columns.length; j++)
 			{
+				if (columns[j].getDataType().equals("TEXT"))
+				{
+					inserts[i] += "\"";
+				}
 				inserts[i] += rows[i][j];
+				if (columns[j].getDataType().equals("TEXT"))
+				{
+					inserts[i] += "\"";
+				}
+				
 				if (j != columns.length - 1)
 				{
 					inserts[i] += ", "; 

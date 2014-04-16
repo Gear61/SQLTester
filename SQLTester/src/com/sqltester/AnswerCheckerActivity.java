@@ -22,8 +22,6 @@ public class AnswerCheckerActivity extends Activity
 		Intent intent = getIntent();
 		questionNum = intent.getIntExtra("QUESTION_NUM", 0);
 		userQuery = intent.getStringExtra("USER_QUERY");
-		System.out.println(userQuery);
-		System.out.println(questionNum);
 		AnswerChecker mrAnswer = new AnswerChecker(context);
 		mrAnswer.checkAnswer(questionNum, userQuery);
 	}
