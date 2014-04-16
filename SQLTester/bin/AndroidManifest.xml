@@ -30,6 +30,12 @@
 	        android:parentActivityName="com.sqltester.MainActivity" >
     	</activity>
         
+        <activity
+	        android:name="com.sqltester.AnswerCheckerActivity"
+	        android:label="@string/answer_checker_activity_display_message"
+	        android:parentActivityName="com.sqltester.QuestionActivity" >
+    	</activity>
+        
     </application>
 
 </manifest>

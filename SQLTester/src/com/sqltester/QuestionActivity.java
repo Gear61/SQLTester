@@ -64,6 +64,13 @@ public class QuestionActivity extends Activity
 		setUpQuestion();
 	}
 	
+	public void checkAnswer(View view) {
+		Intent intent = new Intent(context, AnswerCheckerActivity.class);
+	    intent.putExtra("QUESTION_NUM", currentQuestion);
+	    intent.putExtra("USER_QUERY", queryHelper.getText().toString());
+	    context.startActivity(intent);
+	}
+	
 	// Sets up a question given the number
 	private void setUpQuestion()
 	{

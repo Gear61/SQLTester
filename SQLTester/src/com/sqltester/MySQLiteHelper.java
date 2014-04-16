@@ -9,6 +9,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper
 {
 	private static final String DATABASE_NAME = "sqltester.db";
 	private static final int DATABASE_VERSION = 1;
+	private static SQLiteDatabase database;
 	
 	SchemaServer schemaServer = SchemaServer.getSchemaServer();
 	Schema[] allSchemas = schemaServer.serveAllTables();
@@ -23,6 +24,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper
 	@Override
 	public void onCreate(SQLiteDatabase database)
 	{
+		MySQLiteHelper.database = database;
 		// For each table that the SchemaServer gives us
 		for (int i = 0; i < allSchemas.length; i++)
 		{
@@ -35,6 +37,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper
 				database.execSQL(allInserts[j]);
 			}
 		}
+	}
+	
+	public static SQLiteDatabase getConnection() {
+		return database;
 	}
 	
 	@Override

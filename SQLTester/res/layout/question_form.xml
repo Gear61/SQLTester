@@ -53,7 +53,7 @@
 	            android:text="@string/submit_query"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:onClick="narrowResults"/>
+	            android:onClick="checkAnswer"/>
 	        
 	        <AutoCompleteTextView
 	            android:id="@+id/query_entry"
