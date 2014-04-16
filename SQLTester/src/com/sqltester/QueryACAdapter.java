@@ -166,6 +166,7 @@ public class QueryACAdapter extends ArrayAdapter<String>
             {
                 String pieces[] = constraint.toString().split(" ");
                 String target = pieces[pieces.length - 1];
+                target.replace("(", "");
                 for (int i = 0, j = 0; i < itemsAll.size() && j <= 10; i++)
                 {
                     if (itemsAll.get(i).toString().toLowerCase().contains((target.toLowerCase()))

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 
 public class MisterDataSource
 {
@@ -31,56 +32,64 @@ public class MisterDataSource
 	public String[][] getData(String queryString)
 	{
 		open();
-		Cursor cursor = database.rawQuery(queryString, null);
-		int row = cursor.getCount(), col = cursor.getColumnCount();
-		
-		// If no data was gotten, return null
-		if (row == 0)
+		try
+		{
+    		Cursor cursor = database.rawQuery(queryString, null);
+    		int row = cursor.getCount(), col = cursor.getColumnCount();
+    		
+    		// If no data was gotten, return null
+    		if (row == 0)
+    		{
+    			String[][] empty = {};
+    			return empty;
+    		}
+    		
+    		String[][] ourData = new String[row][col];
+    		int[] typeDict = new int[col];
+    
+    		cursor.moveToNext();
+    		for (int i = 0; i < col; i++)
+    		{
+    			typeDict[i] = cursor.getType(i);
+    		}
+    		cursor.moveToPrevious();
+    
+    		int eye = 0;
+    		while (cursor.moveToNext())
+    		{
+    			for (int i = 0; i < col; i++)
+    			{
+    				switch (typeDict[i])
+    				{
+    					case Cursor.FIELD_TYPE_STRING:
+    						ourData[eye][i] = cursor.getString(i);
+    						break;
+    
+    					case Cursor.FIELD_TYPE_INTEGER:
+    						ourData[eye][i] = String.valueOf(cursor.getInt(i));
+    						break;
+    
+    					case Cursor.FIELD_TYPE_FLOAT:
+    						ourData[eye][i] = String.valueOf(cursor.getFloat(i));
+    						break;
+    
+    					case Cursor.FIELD_TYPE_NULL:
+    						ourData[eye][i] = null;
+    						break;
+    
+    					case Cursor.FIELD_TYPE_BLOB:
+    						break;
+    				}
+    			}
+    			eye++;
+    		}
+    		cursor.close();
+    		close();
+    		return ourData;
+    	}
+		catch (SQLiteException e)
 		{
 			return null;
 		}
-		
-		String[][] ourData = new String[row][col];
-		int[] typeDict = new int[col];
-
-		cursor.moveToNext();
-		for (int i = 0; i < col; i++)
-		{
-			typeDict[i] = cursor.getType(i);
-		}
-		cursor.moveToPrevious();
-
-		int eye = 0;
-		while (cursor.moveToNext())
-		{
-			for (int i = 0; i < col; i++)
-			{
-				switch (typeDict[i])
-				{
-					case Cursor.FIELD_TYPE_STRING:
-						ourData[eye][i] = cursor.getString(i);
-						break;
-
-					case Cursor.FIELD_TYPE_INTEGER:
-						ourData[eye][i] = String.valueOf(cursor.getInt(i));
-						break;
-
-					case Cursor.FIELD_TYPE_FLOAT:
-						ourData[eye][i] = String.valueOf(cursor.getFloat(i));
-						break;
-
-					case Cursor.FIELD_TYPE_NULL:
-						ourData[eye][i] = null;
-						break;
-
-					case Cursor.FIELD_TYPE_BLOB:
-						break;
-				}
-			}
-			eye++;
-		}
-		cursor.close();
-		close();
-		return ourData;
 	}
 }

@@ -10,13 +10,16 @@
     <string name="back_arrow">Return to the previous question</string>
     <string name="forward_arrow">Advance to the next question</string>
     
-    <!-- Activity Descriptions -->
-    <string name="question_activity_display_message">Question Prompt</string>
-    <string name="answer_checker_activity_display_message">Answer Checker</string>
-    
     <!-- Query Submission Form -->
     <string name="submit_query">Run Query!</string>
     
+    <!-- Answer Evaluation -->
+    <string name="advance_forward">Advance to the next question</string>
+    <string name="correct_answers">Here is what should have been returned:</string>
+    
+     <!-- Activity Descriptions -->
+    <string name="question_activity_display_message">Question Prompt</string>
+    <string name="answer_checker_activity_display_message">Answer Checker</string>
     
     <!-- Justin's random durdling -->
     <string name="app_name">SQLTester</string>

@@ -20,8 +20,11 @@ public class AnswerChecker
 		String[][] correctAnswers = dataSource.getData(AnswerServer.getAnswer(questionNumber));
 		Boolean wasCorrect = true;
 		
-		// If their query actually returned something, we're in business
-		if (userResult != null)
+		if (userResult == null || userResult.length == 0)
+		{
+			wasCorrect = false;
+		}
+		else
 		{
     		// HashSet to store the rows fetched by the users
     		HashSet <String> UserAnswers = new HashSet <String>();

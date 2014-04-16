@@ -29,50 +29,62 @@ public final class R {
         public static final int x_mark_red=0x7f020005;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000b;
-        public static final int backward=0x7f08000c;
-        public static final int completion_status=0x7f080008;
-        public static final int forward=0x7f08000e;
-        public static final int our_table=0x7f080003;
-        public static final int placeholder=0x7f08000d;
-        public static final int problem=0x7f080004;
-        public static final int query_entry=0x7f080007;
-        public static final int questionList=0x7f08000a;
-        public static final int question_number=0x7f080001;
-        public static final int random=0x7f080009;
-        public static final int submission_form=0x7f080005;
-        public static final int submit_query=0x7f080006;
+        public static final int ScrollView01=0x7f080001;
+        public static final int action_settings=0x7f080012;
+        public static final int advance_forward=0x7f080007;
+        public static final int backward=0x7f080013;
+        public static final int completion_status=0x7f08000f;
+        public static final int correct_answers=0x7f080005;
+        public static final int correct_answers_table=0x7f080006;
+        public static final int forward=0x7f080015;
+        public static final int our_table=0x7f08000a;
+        public static final int placeholder=0x7f080014;
+        public static final int problem=0x7f08000b;
+        public static final int query_entry=0x7f08000e;
+        public static final int questionList=0x7f080011;
+        public static final int question_number=0x7f080008;
+        public static final int random=0x7f080010;
+        public static final int submission_form=0x7f08000c;
+        public static final int submit_query=0x7f08000d;
         public static final int suggestion=0x7f080000;
-        public static final int table_design=0x7f080002;
+        public static final int table_design=0x7f080009;
+        public static final int their_answers=0x7f080003;
+        public static final int their_answers_table=0x7f080004;
+        public static final int verdict=0x7f080002;
     }
     public static final class layout {
         public static final int acquery_item=0x7f030000;
-        public static final int question_form=0x7f030001;
-        public static final int question_item=0x7f030002;
-        public static final int question_list=0x7f030003;
+        public static final int evaluation=0x7f030001;
+        public static final int question_form=0x7f030002;
+        public static final int question_item=0x7f030003;
+        public static final int question_list=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;
         public static final int question_menu=0x7f070001;
     }
     public static final class string {
-        public static final int action_settings=0x7f050009;
-        public static final int answer_checker_activity_display_message=0x7f050006;
+        public static final int action_settings=0x7f05000b;
+        /**  Answer Evaluation 
+         */
+        public static final int advance_forward=0x7f050006;
+        public static final int answer_checker_activity_display_message=0x7f050009;
         /**  Justin's random durdling 
          */
-        public static final int app_name=0x7f050008;
+        public static final int app_name=0x7f05000a;
         /**  Question Menu 
          */
         public static final int back_arrow=0x7f050003;
         public static final int completion_status=0x7f050002;
+        public static final int correct_answers=0x7f050007;
         public static final int forward_arrow=0x7f050004;
         public static final int our_table=0x7f050001;
         /**  Activity Descriptions 
          */
-        public static final int question_activity_display_message=0x7f050005;
+        public static final int question_activity_display_message=0x7f050008;
         /**  Query Submission Form 
          */
-        public static final int submit_query=0x7f050007;
+        public static final int submit_query=0x7f050005;
         /**  Question List View 
          */
         public static final int welcome=0x7f050000;
