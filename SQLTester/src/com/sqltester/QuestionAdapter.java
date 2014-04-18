@@ -100,8 +100,11 @@ public class QuestionAdapter extends BaseAdapter
         final String question = questionList[position];
         if (question != null)
         {
-        	// Set the check/x-mark. TODO: Need to update with database logic
-        	holder.item1.setImageResource(R.drawable.x_mark_red);
+        	MisterDataSource theJudge = new MisterDataSource(context);
+        	if (theJudge.checkAnswer(position))
+        		holder.item1.setImageResource(R.drawable.check_mark);
+        	else
+        		holder.item1.setImageResource(R.drawable.x_mark_red);
         	
         	// Load in "Question X"
         	holder.item2.setText(question);

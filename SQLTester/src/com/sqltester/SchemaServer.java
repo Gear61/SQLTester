@@ -14,7 +14,6 @@ public class SchemaServer
 	private Column[][] tableColumns = {
                             			{
                             				new Column("Question_Number", "TEXT"),
-                            				new Column("Completed", "TEXT"),
                             			},
 										{
             								new Column("Professor_Name", "TEXT"),

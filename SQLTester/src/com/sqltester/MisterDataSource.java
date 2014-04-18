@@ -1,5 +1,6 @@
 package com.sqltester;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -27,6 +28,73 @@ public class MisterDataSource
 	private void close()
 	{
 		dbHelper.close();
+	}
+	
+	public boolean addAnswer(int qNumi) {
+		open();
+		try {
+			long ret = -1;
+			String qNum = Integer.toString(qNumi);
+			String query = "SELECT COUNT(Question_Number) FROM COMPLETION_STATUS WHERE Question_Number = \""+ qNum +"\";";
+			Cursor cursor = database.rawQuery(query, null);
+			cursor.moveToNext();
+			if (cursor.getInt(0) == 0) {
+				query = "INSERT INTO COMPLETION_STATUS VALUES ('" + qNum + "');";
+				ContentValues cv = new ContentValues(1);
+				cv.put("Question_Number", qNum);
+				ret = database.insertOrThrow("COMPLETION_STATUS", null, cv);
+				System.out.println("successfully inserted query!");
+				cursor.close();
+			} else {
+				cursor.close();
+				System.out.println("answer was answered correctly before");
+			}
+			close();
+			if (ret >= 0)
+				return true;
+			else
+				return false;
+		} catch (SQLiteException e) {
+			close();
+			return false;
+		}
+	}
+	
+	public boolean checkAnswer(int qNumi) {
+		open();
+		try {
+			String qNum = Integer.toString(qNumi);
+			String query = "SELECT COUNT(Question_Number) FROM COMPLETION_STATUS WHERE Question_Number = \""+ qNum +"\";";
+			Cursor cursor = database.rawQuery(query, null);
+			cursor.moveToNext();
+			if(cursor.getInt(0) > 0) {
+				cursor.close();
+				close();
+				return true;
+			} else {
+				cursor.close();
+				close();
+				return false;
+			}
+		} catch (SQLiteException e) {
+			close();
+			return false;
+		}
+	}
+	
+	public void printTable() {
+		System.out.println("inside printTable()");
+		open();
+		String query = "SELECT * FROM COMPLETION_STATUS;";
+		Cursor cursor = database.rawQuery(query, null);
+		int row = cursor.getCount();
+		while (cursor.moveToNext()) {
+			for (int i = 0; i < row; i++) {
+				System.out.println(cursor.getString(0));
+			}
+		}
+		cursor.close();
+		close();
 	}
 
 	public ResultSet getData(String queryString)
@@ -97,4 +165,5 @@ public class MisterDataSource
 			return new ResultSet(null, null);
 		}
 	}
+	
 }

@@ -27,7 +27,7 @@ public class AnswerCheckerActivity extends Activity
 	TextView verdict;
 	TextView their_answers;
 	Button advance_forward;
-	Button retry;
+	Button retry, give_up;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -47,6 +47,7 @@ public class AnswerCheckerActivity extends Activity
 		their_answers = (TextView) findViewById(R.id.their_answers);
 		advance_forward = (Button) findViewById(R.id.advance_forward);
 		retry = (Button) findViewById(R.id.retry_question);
+		give_up = (Button) findViewById(R.id.give_up);
 		
 		displayResponse(mrAnswer.checkAnswer(questionNum, userQuery));
 	}
@@ -55,6 +56,11 @@ public class AnswerCheckerActivity extends Activity
 	{
 		if (score.getWasCorrect())
 		{
+			// TODO: add the correct tuple into the database
+			System.out.println("WOW");
+			MisterDataSource updateAnswer = new MisterDataSource(context);
+			System.out.println(questionNum);
+			updateAnswer.addAnswer(questionNum);
 			verdict.setText("Congratulations! You got the correct answer!");
 			if (questionNum != QuestionServer.getNumQuestions() - 1)
 			{
@@ -64,6 +70,7 @@ public class AnswerCheckerActivity extends Activity
 		else
 		{
 			retry.setVisibility(View.VISIBLE);
+			give_up.setVisibility(View.VISIBLE);
 			verdict.setText("Your query was incorrect. Please try again.");
 		}
 		
@@ -130,6 +137,11 @@ public class AnswerCheckerActivity extends Activity
 	    context.startActivity(intent);
 	}
 	
+	public void giveUp(View view) {
+		String giveUpAns = AnswerServer.getAnswer(questionNum);
+		Util.showDialog(giveUpAns, context);
+	}
+	
 	public void advanceToNextQuestion(View view)
 	{
 		Intent intent = new Intent(context, QuestionActivity.class);
@@ -140,9 +152,9 @@ public class AnswerCheckerActivity extends Activity
 	
 	public void returnToQuestionList(View view)
 	{
-		Intent intent = new Intent(context, MainActivity.class);
+		// Intent intent = new Intent(context, MainActivity.class);
 	    AnswerCheckerActivity.this.finish();
-	    context.startActivity(intent);
+	    // context.startActivity(intent);
 	}
 
 	@Override
