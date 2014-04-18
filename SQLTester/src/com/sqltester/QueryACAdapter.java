@@ -29,7 +29,7 @@ public class QueryACAdapter extends ArrayAdapter<String>
 	
 	private ArrayList<String> constants = new ArrayList<String>
 			(Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
-			   "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS"));
+			   "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM"));
 	
     private ArrayList<String> itemsAll;
     private ArrayList<String> suggestions;
@@ -99,12 +99,21 @@ public class QueryACAdapter extends ArrayAdapter<String>
 			throws IllegalArgumentException, IllegalStateException
 			{
 				String[] pieces = currentInput.split(" ");
-				pieces[pieces.length - 1] = parent.getItemAtPosition(position).toString();
+				String autoFill = "";
+				if (pieces[pieces.length - 1].contains("("))
+				{
+					autoFill += pieces[pieces.length - 1].split("\\(")[0] + "(";
+				}
+				autoFill += parent.getItemAtPosition(position).toString();
+				pieces[pieces.length - 1] = autoFill;
 				String longerQuery = "";
 				for (int i = 0; i < pieces.length; i++)
 				{
 					longerQuery += pieces[i];
-					longerQuery += " ";
+					if (i != pieces.length - 1)
+					{
+						longerQuery += " ";
+					}
 				}
 				userQuery.setText(longerQuery);
 				userQuery.setSelection(longerQuery.length());
@@ -166,15 +175,20 @@ public class QueryACAdapter extends ArrayAdapter<String>
             {
                 String pieces[] = constraint.toString().split(" ");
                 String target = pieces[pieces.length - 1];
-                target.replace("(", "");
-                for (int i = 0, j = 0; i < itemsAll.size() && j <= 10; i++)
+                pieces = target.split("\\(");
+                target = pieces[pieces.length - 1];
+                if (!target.equals(""))
                 {
-                    if (itemsAll.get(i).toString().toLowerCase().contains((target.toLowerCase()))
-                    	&& !itemsAll.get(i).toString().toLowerCase().equals(target.toLowerCase())
-                    	&& !suggestions.contains(itemsAll.get(i)))
+                    // Linear search to populate suggestions
+                	for (int i = 0, j = 0; i < itemsAll.size() && j <= 10; i++)
                     {
-                        j++;
-                    	suggestions.add(itemsAll.get(i));
+                        if (itemsAll.get(i).toString().toLowerCase().startsWith((target.toLowerCase()))
+                        	&& !itemsAll.get(i).toString().toLowerCase().equals(target.toLowerCase())
+                        	&& !suggestions.contains(itemsAll.get(i)))
+                        {
+                            j++;
+                        	suggestions.add(itemsAll.get(i));
+                        }
                     }
                 }
                 FilterResults filterResults = new FilterResults();

@@ -16,8 +16,10 @@ public class AnswerChecker
 	public ResponseBundle checkAnswer(int questionNumber, String userQuery)
 	{
 		// Get both results sets, set up wasCorrect. Innocent until proven guilty
-		String[][] userResult = dataSource.getData(userQuery);
-		String[][] correctAnswers = dataSource.getData(AnswerServer.getAnswer(questionNumber));
+		ResultSet userPackage = dataSource.getData(userQuery);
+		ResultSet correctAnswersPackage = dataSource.getData(AnswerServer.getAnswer(questionNumber));
+		String[][] userResult = userPackage.getData();
+		String[][] correctAnswers = correctAnswersPackage.getData();
 		Boolean wasCorrect = true;
 		
 		if (userResult == null || userResult.length == 0)
@@ -58,6 +60,6 @@ public class AnswerChecker
     			}
     		}
 		}
-		return new ResponseBundle(wasCorrect, userResult, correctAnswers);
+		return new ResponseBundle(wasCorrect, userPackage, correctAnswersPackage);
 	}
 }

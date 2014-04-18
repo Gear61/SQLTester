@@ -8,10 +8,10 @@ package com.sqltester;
 public class ResponseBundle
 {
 	private Boolean wasCorrect;
-	private String[][] userResults;
-	private String[][] correctAnswers;
+	private ResultSet userResults;
+	private ResultSet correctAnswers;
 	
-	public ResponseBundle (Boolean wasCorrect, String[][] userResults, String[][] correctAnswers)
+	public ResponseBundle (Boolean wasCorrect, ResultSet userResults, ResultSet correctAnswers)
 	{
 		this.wasCorrect = wasCorrect;
 		this.userResults = userResults;
@@ -23,12 +23,12 @@ public class ResponseBundle
 		return wasCorrect;
 	}
 	
-	public String[][] userResults()
+	public ResultSet userResults()
 	{
 		return userResults;
 	}
 	
-	public String[][] correctAnswers()
+	public ResultSet correctAnswers()
 	{
 		return correctAnswers;
 	}

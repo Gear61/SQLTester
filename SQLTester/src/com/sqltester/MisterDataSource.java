@@ -29,19 +29,24 @@ public class MisterDataSource
 		dbHelper.close();
 	}
 
-	public String[][] getData(String queryString)
+	public ResultSet getData(String queryString)
 	{
 		open();
 		try
 		{
     		Cursor cursor = database.rawQuery(queryString, null);
     		int row = cursor.getCount(), col = cursor.getColumnCount();
+    		String columns[] = new String[col];
+    		for (int i = 0; i < col; i++)	
+    		{
+    			columns[i] = cursor.getColumnName(i);
+    		}
     		
     		// If no data was gotten, return null
     		if (row == 0)
     		{
     			String[][] empty = {};
-    			return empty;
+    			return new ResultSet(columns, empty);
     		}
     		
     		String[][] ourData = new String[row][col];
@@ -85,11 +90,11 @@ public class MisterDataSource
     		}
     		cursor.close();
     		close();
-    		return ourData;
+    		return new ResultSet(columns, ourData);
     	}
 		catch (SQLiteException e)
 		{
-			return null;
+			return new ResultSet(null, null);
 		}
 	}
 }

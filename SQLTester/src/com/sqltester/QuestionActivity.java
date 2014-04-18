@@ -56,8 +56,7 @@ public class QuestionActivity extends Activity
 		setContentView(R.layout.question_form);
 
 		Intent intent = getIntent();
-		int questionNum = intent.getIntExtra("QUESTION_NUM", 0);
-		currentQuestion = questionNum;
+		currentQuestion = intent.getIntExtra("QUESTION_NUM", 0);
 
 		questionNumber = (TextView) findViewById(R.id.question_number);
 		tableDesign = (TextView) findViewById(R.id.table_design);
@@ -74,6 +73,7 @@ public class QuestionActivity extends Activity
     		Intent intent = new Intent(context, AnswerCheckerActivity.class);
     		intent.putExtra("QUESTION_NUM", currentQuestion);
     		intent.putExtra("USER_QUERY", queryHelper.getText().toString());
+    		QuestionActivity.this.finish();
     		context.startActivity(intent);
 		}
 		else
@@ -89,8 +89,6 @@ public class QuestionActivity extends Activity
 		questionNumber.setText("Question #" + String.valueOf(currentQuestion + 1));
 
 		// Get description of table we're supposed to use.
-		System.out.println(m_SS.serveTable(QuestionServer.getTableUsed(currentQuestion))
-				.description());
 		tableDesign.setText(m_SS.serveTable(QuestionServer.getTableUsed(currentQuestion))
 				.description());
 

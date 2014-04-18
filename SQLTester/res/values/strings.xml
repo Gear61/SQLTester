@@ -14,8 +14,10 @@
     <string name="submit_query">Run Query!</string>
     
     <!-- Answer Evaluation -->
+    <string name="correct_answers">Here is what our answer query returned:</string>
     <string name="advance_forward">Advance to the next question</string>
-    <string name="correct_answers">Here is what should have been returned:</string>
+    <string name="retry_question">Retry question</string>
+    <string name="return_to_list">Return to question list</string>
     
      <!-- Activity Descriptions -->
     <string name="question_activity_display_message">Question Prompt</string>
