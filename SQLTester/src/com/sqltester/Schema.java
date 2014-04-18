@@ -1,5 +1,8 @@
 package com.sqltester;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 // Represents a schema (collection of columns + names)
 // Knows how to create and populate itself
 public class Schema
@@ -36,6 +39,19 @@ public class Schema
 	public Column[] getColumns()
 	{
 		return columns;
+	}
+	
+	public ArrayList<String> createSuggestions()
+	{
+		HashSet<String> noDupes = new HashSet<String>();
+		for (int i = 0; i < rows.length; i++)
+		{
+			for (int j = 0; j < rows[0].length; j++)
+			{
+				noDupes.add(rows[i][j]);
+			}
+		}
+		return new ArrayList<String>(noDupes);
 	}
 	
 	// Returns a string describing itself to the app user

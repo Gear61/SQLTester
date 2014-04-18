@@ -8,7 +8,7 @@ import android.text.Html;
 
 public class Util
 {
-	public static void showDialog(String message, Context context)
+	public static void showDialog(String message, Context context, String title)
 	{
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
@@ -24,6 +24,7 @@ public class Util
 
 		// Create alert dialog and show it
 		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.setTitle(title);
 		alertDialog.show();
 	}
 	

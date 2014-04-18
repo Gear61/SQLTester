@@ -80,7 +80,7 @@ public class QuestionActivity extends Activity
 		}
 		else
 		{
-			Util.showDialog("Please enter a SELECT statement.", context);
+			Util.showDialog("Please enter a SELECT statement.", context, "");
 		}
 	}
 
@@ -150,9 +150,11 @@ public class QuestionActivity extends Activity
 		killKeyboard();
 		switch (item.getItemId())
 		{
-		/*
-		 * case android.R.id.home: break;
-		 */
+			case android.R.id.home:
+				Intent intent = new Intent(context, MainActivity.class);
+			    QuestionActivity.this.finish();
+			    context.startActivity(intent);
+				break;
 			case R.id.backward:
 				currentQuestion--;
 				setUpQuestion();

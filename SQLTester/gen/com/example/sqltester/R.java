@@ -26,7 +26,8 @@ public final class R {
         public static final int forward=0x7f020002;
         public static final int ic_launcher=0x7f020003;
         public static final int placeholder=0x7f020004;
-        public static final int x_mark_red=0x7f020005;
+        public static final int sql_logo=0x7f020005;
+        public static final int x_mark_red=0x7f020006;
     }
     public static final class id {
         public static final int ScrollView01=0x7f080001;

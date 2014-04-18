@@ -3,49 +3,23 @@ package com.sqltester;
 import com.example.sqltester.R;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class QuestionAdapter extends BaseAdapter
 {
 	private Context context;
-	private ListView questionListView;
 	private String[] questionList = new String[QuestionServer.getNumQuestions()];
 	
 	// Creates the "Question 1, Question 2, etc..." list
-	public QuestionAdapter(Context context, ListView questionListView)
+	public QuestionAdapter(Context context)
 	{
 		this.context = context;
-		
-		// Set up ListView
-		this.questionListView = questionListView;
-		setClickListener();
-		
 		populateList();
-	}
-	
-	// Starts new activity, passing question number
-	private void setClickListener()
-	{
-		this.questionListView.setOnItemClickListener(new OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
-			throws IllegalArgumentException, IllegalStateException
-			{
-				Intent intent = new Intent(context, QuestionActivity.class);
-			    intent.putExtra("QUESTION_NUM", position);
-			    context.startActivity(intent);
-			}
-		});
 	}
 	
 	// Fills in "Question 1, Question 2, etc..." list

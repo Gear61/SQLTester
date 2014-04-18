@@ -103,7 +103,7 @@ public class AnswerCheckerActivity extends Activity
 		for (int i = 0; i < columns.length; i++)
 		{
 			TextView text = new TextView(this);
-	        text.setText(columns[i].replace("_", " "));
+	        text.setText(columns[i]);
 	        text.setLayoutParams(params1);
 	        text.setTypeface(null, Typeface.BOLD);
 	        topRow.addView(text);
@@ -139,7 +139,7 @@ public class AnswerCheckerActivity extends Activity
 	
 	public void giveUp(View view) {
 		String giveUpAns = AnswerServer.getAnswer(questionNum);
-		Util.showDialog(giveUpAns, context);
+		Util.showDialog(giveUpAns, context, "Our Answer Query");
 	}
 	
 	public void advanceToNextQuestion(View view)
@@ -152,9 +152,9 @@ public class AnswerCheckerActivity extends Activity
 	
 	public void returnToQuestionList(View view)
 	{
-		// Intent intent = new Intent(context, MainActivity.class);
+		Intent intent = new Intent(context, MainActivity.class);
 	    AnswerCheckerActivity.this.finish();
-	    // context.startActivity(intent);
+	    context.startActivity(intent);
 	}
 
 	@Override

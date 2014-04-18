@@ -48,6 +48,7 @@ public class QueryACAdapter extends ArrayAdapter<String>
     	setProgressTracker();
     	addConstants();
     	addTableInformation();
+    	addRowInformation();
     }
     
     private void addConstants()
@@ -71,6 +72,16 @@ public class QueryACAdapter extends ArrayAdapter<String>
         
         this.itemsAll = (ArrayList<String>) QueryACAdapter.items.clone();
         this.suggestions = new ArrayList<String>();
+    }
+    
+    // Adds suggestions from rows. Ain't nobody got time to type out Computer Science
+    private void addRowInformation()
+    {
+    	ArrayList<String> suggestions = currentSchema.createSuggestions();
+    	for (int i = 0; i < suggestions.size(); i++)
+    	{
+    		items.add(suggestions.get(i));
+    	}
     }
     
     private void setProgressTracker()
@@ -103,6 +114,10 @@ public class QueryACAdapter extends ArrayAdapter<String>
 				if (pieces[pieces.length - 1].contains("("))
 				{
 					autoFill += pieces[pieces.length - 1].split("\\(")[0] + "(";
+				}
+				else if (pieces[pieces.length - 1].contains("\""))
+				{
+					autoFill += pieces[pieces.length - 1].split("\"")[0] + "\"";
 				}
 				autoFill += parent.getItemAtPosition(position).toString();
 				pieces[pieces.length - 1] = autoFill;
@@ -176,6 +191,8 @@ public class QueryACAdapter extends ArrayAdapter<String>
                 String pieces[] = constraint.toString().split(" ");
                 String target = pieces[pieces.length - 1];
                 pieces = target.split("\\(");
+                target = pieces[pieces.length - 1];
+                pieces = target.split("\"");
                 target = pieces[pieces.length - 1];
                 if (!target.equals(""))
                 {

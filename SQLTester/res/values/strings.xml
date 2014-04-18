@@ -25,7 +25,7 @@
     <string name="answer_checker_activity_display_message">Answer Checker</string>
     
     <!-- Justin's random durdling -->
-    <string name="app_name">SQLTester</string>
+    <string name="app_name">SQL Tester</string>
     <string name="action_settings">Settings</string>
 
 </resources>
