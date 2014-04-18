@@ -20,6 +20,7 @@ public class QuestionActivity extends Activity
 	final Context context = this;
 	SchemaServer m_SS = SchemaServer.getSchemaServer();
 	int currentQuestion;
+	String queryPreSet;
 
 	// Question form views
 	TextView questionNumber;
@@ -62,6 +63,7 @@ public class QuestionActivity extends Activity
 		tableDesign = (TextView) findViewById(R.id.table_design);
 		questionPrompt = (TextView) findViewById(R.id.problem);
 		queryHelper = (AutoCompleteTextView) findViewById(R.id.query_entry);
+		queryPreSet = intent.getStringExtra("USER_QUERY");
 
 		setUpQuestion();
 	}
@@ -100,6 +102,8 @@ public class QuestionActivity extends Activity
 				android.R.layout.simple_dropdown_item_1line, m_SS.serveTable(QuestionServer
 						.getTableUsed(currentQuestion)), queryHelper);
 		queryHelper.setAdapter(adapter);
+		if (queryPreSet != null)
+			queryHelper.setText(queryPreSet);
 	}
 
 	@Override

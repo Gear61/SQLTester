@@ -125,6 +125,7 @@ public class AnswerCheckerActivity extends Activity
 	{
 		Intent intent = new Intent(context, QuestionActivity.class);
 	    intent.putExtra("QUESTION_NUM", questionNum);
+	    intent.putExtra("USER_QUERY", userQuery);
 	    AnswerCheckerActivity.this.finish();
 	    context.startActivity(intent);
 	}
