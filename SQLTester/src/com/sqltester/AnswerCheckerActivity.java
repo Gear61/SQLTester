@@ -57,9 +57,7 @@ public class AnswerCheckerActivity extends Activity
 		if (score.getWasCorrect())
 		{
 			// TODO: add the correct tuple into the database
-			System.out.println("WOW");
 			MisterDataSource updateAnswer = new MisterDataSource(context);
-			System.out.println(questionNum);
 			updateAnswer.addAnswer(questionNum);
 			verdict.setText("Congratulations! You got the correct answer!");
 			if (questionNum != QuestionServer.getNumQuestions() - 1)
