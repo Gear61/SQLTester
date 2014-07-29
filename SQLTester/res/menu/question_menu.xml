@@ -3,18 +3,11 @@
     <item android:id="@+id/backward"
           android:icon="@drawable/backward"
           android:title="@string/back_arrow"
-          android:visible="false"
-          android:showAsAction="ifRoom" />
-    
-     <item android:id="@+id/placeholder"
-          android:icon="@drawable/placeholder"
-          android:visible="false"
           android:showAsAction="ifRoom" />
     
     <item android:id="@+id/forward"
           android:icon="@drawable/forward"
           android:title="@string/forward_arrow"
-          android:visible="false"
           android:showAsAction="ifRoom" />
 
 </menu>

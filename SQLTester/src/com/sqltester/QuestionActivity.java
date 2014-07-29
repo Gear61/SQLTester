@@ -31,7 +31,6 @@ public class QuestionActivity extends Activity
 	// Menu items, don't want to find multiple times
 	MenuItem backward;
 	MenuItem forward;
-	MenuItem placeholder;
 
 	public boolean killKeyboard()
 	{
@@ -87,6 +86,9 @@ public class QuestionActivity extends Activity
 	// Sets up a question given the number
 	private void setUpQuestion()
 	{
+		// Clear contents if we're coming here from a different question
+        queryHelper.setText("");
+
 		// Set up simple title
 		questionNumber.setText("Question #" + String.valueOf(currentQuestion + 1));
 
@@ -113,41 +115,13 @@ public class QuestionActivity extends Activity
 		getMenuInflater().inflate(R.menu.question_menu, menu);
 		backward = menu.findItem(R.id.backward);
 		forward = menu.findItem(R.id.forward);
-		placeholder = menu.findItem(R.id.placeholder);
-		return true;
-	}
-
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu)
-	{
-		// No forward, last question
-		if (currentQuestion == (QuestionServer.getNumQuestions() - 1))
-		{
-			forward.setVisible(false);
-			backward.setVisible(true);
-			placeholder.setVisible(true);
-		}
-		// No backward, first question
-		else if (currentQuestion == 0)
-		{
-			forward.setVisible(true);
-			backward.setVisible(false);
-			placeholder.setVisible(true);
-		}
-		else
-		// Disable placeholder
-		{
-			forward.setVisible(true);
-			backward.setVisible(true);
-			placeholder.setVisible(false);
-		}
-		super.onPrepareOptionsMenu(menu);
 		return true;
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		killKeyboard();
+        int numQuestions = QuestionServer.getNumQuestions();
 		switch (item.getItemId())
 		{
 			case android.R.id.home:
@@ -157,10 +131,18 @@ public class QuestionActivity extends Activity
 				break;
 			case R.id.backward:
 				currentQuestion--;
+                if (currentQuestion < 0)
+                {
+                    currentQuestion = numQuestions - 1;
+                }
 				setUpQuestion();
 				break;
 			case R.id.forward:
 				currentQuestion++;
+                if (currentQuestion == numQuestions)
+                {
+                    currentQuestion = 0;
+                }
 				setUpQuestion();
 				break;
 			default:
