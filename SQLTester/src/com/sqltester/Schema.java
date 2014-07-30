@@ -11,16 +11,19 @@ public class Schema {
     private String[][] rows;
     private String insertionTemplate;
 
-    public Schema(String tableName, Column[] columns, String[][] rows) {
+    public Schema(String tableName, Column[] columns, String[][] rows)
+    {
         this.columns = columns;
         this.tableName = tableName;
         this.rows = rows;
 
         // Initialize insertionTemplate base of "INSERT INTO TABLE_NAME (COLUMNS) VALUES )"
         insertionTemplate = "INSERT INTO " + tableName + " (";
-        for (int i = 0; i < columns.length; i++) {
+        for (int i = 0; i < columns.length; i++)
+        {
             insertionTemplate += columns[i].getRowName();
-            if (i != columns.length - 1) {
+            if (i != columns.length - 1)
+            {
                 insertionTemplate += ", ";
             }
         }
@@ -38,7 +41,10 @@ public class Schema {
     }
 
     // Returns how many rows this schema contains. This is what the number should always be
-    public int numRows() { return rows.length; }
+    public int numRows()
+    {
+        return rows.length;
+    }
 
 	public ArrayList<String> createSuggestions()
 	{

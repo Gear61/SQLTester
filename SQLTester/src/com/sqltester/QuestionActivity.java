@@ -19,6 +19,7 @@ public class QuestionActivity extends Activity
 {
 	final Context context = this;
 	SchemaServer m_SS = SchemaServer.getSchemaServer();
+    QuestionServer m_QS = QuestionServer.getQuestionServer();
 	int currentQuestion;
 	String queryPreSet;
 
@@ -92,17 +93,25 @@ public class QuestionActivity extends Activity
 		// Set up simple title
 		questionNumber.setText("Question #" + String.valueOf(currentQuestion + 1));
 
-		// Get description of table we're supposed to use.
-		tableDesign.setText(m_SS.serveTable(QuestionServer.getTableUsed(currentQuestion))
-				.description());
+		// Get descriptions of the tables we're supposed to use.
+        String tableDescriptions = "";
+        int[] relevantTables = m_QS.getQuestion(currentQuestion).giveNeededTables();
+        for (int i = 0; i < relevantTables.length; i++)
+        {
+            if (i != 0)
+            {
+                tableDescriptions += "\n\n";
+            }
+            tableDescriptions += m_SS.serveTable(relevantTables[i]).description();
+        }
+		tableDesign.setText(tableDescriptions);
 
 		// Load the problem
-		questionPrompt.setText(QuestionServer.getQuestion(currentQuestion));
+		questionPrompt.setText(m_QS.getQuestion(currentQuestion).giveQuestionText());
 
 		// Set up Auto Complete
-		QueryACAdapter adapter = new QueryACAdapter(context,
-				android.R.layout.simple_dropdown_item_1line, m_SS.serveTable(QuestionServer
-						.getTableUsed(currentQuestion)), queryHelper);
+		QueryACAdapter adapter = new QueryACAdapter(context, android.R.layout.simple_dropdown_item_1line,
+                                                    m_SS.serveSomeTables(relevantTables), queryHelper);
 		queryHelper.setAdapter(adapter);
 		if (queryPreSet != null)
 			queryHelper.setText(queryPreSet);
@@ -118,6 +127,7 @@ public class QuestionActivity extends Activity
 		return true;
 	}
 
+    // Handles menu clicks. Home (back) button goes back to question list, back/forward go through the questions
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		killKeyboard();

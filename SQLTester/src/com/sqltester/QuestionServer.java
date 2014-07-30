@@ -1,13 +1,27 @@
 package com.sqltester;
 
 // This class contains the questions our app contains
-
 public class QuestionServer
 {
+    // Our singleton
+    public static QuestionServer instance = null;
+
 	// Hooray for strange 0 indexing.
-	// Question 1 -> Table 1 = {0,0}, so the first element of this array would be 0
-	private static int[] questionTablePairings = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-	
+	// Question 1 -> Table 2 = {0, 1}, so the first element of this array would be 1
+	private static int[][] questionTablePairings =
+        {{1},
+         {1},
+         {1},
+         {1},
+         {1},
+         {1},
+         {1},
+         {1},
+         {1},
+         {1},
+         {1},
+         {1}};
+
 	// Questions stored here in this ghetto hard-coded array
 	private static String[] questions =
 		{"Write a query that outputs all of the contents of the table.",
@@ -22,21 +36,36 @@ public class QuestionServer
 		 "Write a query that returns the name and salaries (in this column order) of the Top 5 highest earning" +
 		 " professors.",
 		 "Write a query that returns the name and salary (in this column order) of the lowest earning professor.",
-		 "Write a query returns the department Professor \"Zaniolo\" works in."};
-	
-	// Returns the index of the table that the question of interest uses
-	public static int getTableUsed (int questionNum)
-	{
-		return questionTablePairings[questionNum];
-	}
+		 "Write a query that returns the department Professor \"Zaniolo\" works in.",
+         "Write a query that returns all the professor names that begin with the letter 'C'.",
+         "Write a query that returns the third highest salary in the table."};
+
+    private Question[] allQuestions = new Question[questions.length];
+
+    private QuestionServer ()
+    {
+        for (int i = 0; i < questions.length; i++)
+        {
+            allQuestions[i] = new Question(questions[i], questionTablePairings[i]);
+        }
+    }
+
+    public static QuestionServer getQuestionServer()
+    {
+        if (instance == null)
+        {
+            instance = new QuestionServer();
+        }
+        return instance;
+    }
 	
 	public static int getNumQuestions()
 	{
 		return questions.length;
 	}
 	
-	public static String getQuestion(int position)
+	public Question getQuestion(int position)
 	{
-		return questions[position];
+		return allQuestions[position];
 	}
 }

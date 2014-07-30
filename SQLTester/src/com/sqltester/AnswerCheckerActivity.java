@@ -159,10 +159,11 @@ public class AnswerCheckerActivity extends Activity
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		getMenuInflater().inflate(R.menu.main, menu);
-		getActionBar().setDisplayHomeAsUpEnabled(false);
+		// getActionBar().setDisplayHomeAsUpEnabled(true);
 		return true;
 	}
-	
+
+    // Make sure that hitting the home/back button brings us back to the question we were working on
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		switch (item.getItemId())

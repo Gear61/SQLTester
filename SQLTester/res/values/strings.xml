@@ -3,7 +3,7 @@
 
     <!-- Question List View -->
     <string name="welcome">Simply click on a question to get started!</string>
-    <string name="our_table">Our Table:</string>
+    <string name="our_table">Relevant Table(s):</string>
     <string name="completion_status">Completion Status of Question</string>
     
     <!-- Question Menu -->

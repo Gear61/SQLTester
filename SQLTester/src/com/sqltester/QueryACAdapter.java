@@ -29,28 +29,32 @@ public class QueryACAdapter extends ArrayAdapter<String>
 	
 	private ArrayList<String> constants = new ArrayList<String>
 			(Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
-			   "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM"));
+			   "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM", "LIKE"));
 	
     private ArrayList<String> itemsAll;
     private ArrayList<String> suggestions;
     private AutoCompleteTextView userQuery;
     private String currentInput;
-    private Schema currentSchema;
+    private Schema[] currentSchemas;
 
-    public QueryACAdapter(Context context, int viewResourceId, Schema currentSchema, AutoCompleteTextView userQuery)
+    public QueryACAdapter(Context context, int viewResourceId, Schema[] currentSchemas, AutoCompleteTextView userQuery)
     {
     	super(context, viewResourceId, items);
     	this.context = context;
     	this.userQuery = userQuery;
-    	this.currentSchema = currentSchema;
+    	this.currentSchemas = currentSchemas;
     	
     	setUpAC();
     	setProgressTracker();
     	addConstants();
     	addTableInformation();
     	addRowInformation();
+
+        this.itemsAll = (ArrayList<String>) QueryACAdapter.items.clone();
+        this.suggestions = new ArrayList<String>();
     }
-    
+
+    // Add SQLite keywords (SELECT, FROM, WHERE, etc) to suggestions
     private void addConstants()
     {
     	for (int i = 0; i < constants.size(); i++)
@@ -58,30 +62,33 @@ public class QueryACAdapter extends ArrayAdapter<String>
     		items.add(constants.get(i));
     	}
     }
-    
-    @SuppressWarnings("unchecked")
+
+    // Add table terms (table name, column names) to suggestions
 	private void addTableInformation()
     {
-    	// Add table terms (table name, column names) to suggestions
-        items.add(currentSchema.getName());
-        Column[] allCols = currentSchema.getColumns();
-        for (int i = 0; i < allCols.length; i++)
+        for (int i = 0; i < currentSchemas.length; i++)
         {
-        	items.add(allCols[i].getRowName());
+            items.add(currentSchemas[i].getName());
         }
-        
-        this.itemsAll = (ArrayList<String>) QueryACAdapter.items.clone();
-        this.suggestions = new ArrayList<String>();
+
+        for (int i = 0; i < currentSchemas.length; i++)
+        {
+            Column[] allCols = currentSchemas[i].getColumns();
+            for (int j = 0; j < allCols.length; j++)
+            {
+                items.add(allCols[j].getRowName());
+            }
+        }
     }
     
-    // Adds suggestions from rows. Ain't nobody got time to type out Computer Science
+    // Adds suggestions from contents of each table.
+    // Ain't nobody got time to type out Computer Science or Zaniolo
     private void addRowInformation()
     {
-    	ArrayList<String> suggestions = currentSchema.createSuggestions();
-    	for (int i = 0; i < suggestions.size(); i++)
-    	{
-    		items.add(suggestions.get(i));
-    	}
+        for (int i = 0; i < currentSchemas.length; i++)
+        {
+            items.addAll(currentSchemas[i].createSuggestions());
+        }
     }
     
     private void setProgressTracker()

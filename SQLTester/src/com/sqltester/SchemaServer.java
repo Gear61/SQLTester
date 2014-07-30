@@ -9,7 +9,7 @@ public class SchemaServer {
 
     // Hardcoded table names + columns here
     // TABLE NAMES
-    private String[] tableNames = {"COMPLETION_STATUS", "SALARIES"};
+    private String[] tableNames = {"COMPLETION_STATUS", "SALARIES", "CHECKED_OUT", "BOOKS"};
 
     // PERSISTENT TABLE NAMES (THOSE THAT ARE NEVER "RENEWED")
     private String[] persistentNames = {"COMPLETION_STATUS"};
@@ -24,6 +24,16 @@ public class SchemaServer {
                             new Column("Professor_Name", "TEXT"),
                             new Column("Department", "TEXT"),
                             new Column("Salary", "INT")
+                    },
+                    {
+                            new Column("First_Name", "TEXT"),
+                            new Column("Last_Name", "TEXT"),
+                            new Column("Book_ID", "INT")
+                    },
+                    {
+                            new Column("Book_ID", "INT"),
+                            new Column("Book_Name", "TEXT"),
+                            new Column("Author", "TEXT")
                     }
             };
 
@@ -64,13 +74,30 @@ public class SchemaServer {
         return null;
     }
 
+    // Return a subset of tables
+    public Schema[] serveSomeTables(int[] targetTables)
+    {
+        Schema[] targetSubset = new Schema[targetTables.length];
+        for (int i = 0; i < targetTables.length; i++)
+        {
+            targetSubset[i] = allSchemas[targetTables[i]];
+        }
+        return targetSubset;
+    }
+
     // Creates and serves all tables
-    public Schema[] serveAllTables() {
+    public Schema[] serveAllTables()
+    {
         return allSchemas;
     }
 
+    public String[] serveAllTableNames()
+    {
+        return tableNames;
+    }
+
     // Serve all non-persistent table names (presumably so they can be updated)
-    public String[] serveNPTables()
+    public String[] serveNPTableNames()
     {
         Set<String> TableNamesSet = new HashSet(Arrays.asList(tableNames));
         Set<String> persistentNamesSet = new HashSet(Arrays.asList(persistentNames));

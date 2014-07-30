@@ -29,12 +29,23 @@ public class MisterDataSource {
         dbHelper.close();
     }
 
-    // Check all non-persistent tables to see if they need an update. If so, rebuild them
+    // 1. Create any tables that haven't been created yet
+    // 2. Check all non-persistent tables to see if they need an update. If so, rebuild them
     // NOTE: This doesn't need an open()/close() pair since it's a collection of other commands
     public void refreshTables()
     {
+        // Create any missing tables
+        String[] allTables = schemaServer.serveAllTableNames();
+        for (int i = 0; i < allTables.length; i++)
+        {
+            if (!tableExists(allTables[i]))
+            {
+                createTable(allTables[i]);
+            }
+        }
+
         // Get list of tables that can renewed from schema server
-        String[] targetTables = schemaServer.serveNPTables();
+        String[] targetTables = schemaServer.serveNPTableNames();
 
         // For each of those tables, check its current row count with what it should be
         // Then destroy/rebuild it if those numbers don't match
@@ -73,6 +84,39 @@ public class MisterDataSource {
             }
         }
         close();
+    }
+
+    // Creates a table
+    public void createTable(String tableName)
+    {
+        open();
+
+        // Create the table
+        database.execSQL(schemaServer.serveTable(tableName).creationStatement());
+
+        // Fill it with data
+        repopulateTable(tableName);
+
+        close();
+    }
+
+    // Checks to see if the table with the given name exists
+    public boolean tableExists(String tableName)
+    {
+        open();
+        Cursor cursor = database.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"+tableName+"'", null);
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                cursor.close();
+                close();
+                return true;
+            }
+        }
+        cursor.close();
+        close();
+        return false;
     }
 
     // Return the number of tuples in a certain table. This number may be outdated
