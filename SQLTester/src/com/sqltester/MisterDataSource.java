@@ -7,95 +7,177 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
-public class MisterDataSource
-{
-	private SQLiteDatabase database;
-	private MySQLiteHelper dbHelper;
+public class MisterDataSource {
+    private SQLiteDatabase database;
+    private MySQLiteHelper dbHelper;
+    SchemaServer schemaServer;
 
-	// Constructor
-	public MisterDataSource(Context context)
-	{
-		dbHelper = new MySQLiteHelper(context);
-	}
+    // Constructor
+    public MisterDataSource(Context context)
+    {
+        dbHelper = new MySQLiteHelper(context);
+        schemaServer = SchemaServer.getSchemaServer();
+    }
 
-	// Open connection to database
-	private void open() throws SQLException
-	{
-		database = dbHelper.getWritableDatabase();
-	}
+    // Open connection to database
+    private void open() throws SQLException {
+        database = dbHelper.getWritableDatabase();
+    }
 
-	// Terminate connection to database
-	private void close()
-	{
-		dbHelper.close();
-	}
-	
-	public boolean addAnswer(int qNumi) {
+    // Terminate connection to database
+    private void close() {
+        dbHelper.close();
+    }
+
+    // Check all non-persistent tables to see if they need an update. If so, rebuild them
+    // NOTE: This doesn't need an open()/close() pair since it's a collection of other commands
+    public void refreshTables()
+    {
+        // Get list of tables that can renewed from schema server
+        String[] targetTables = schemaServer.serveNPTables();
+
+        // For each of those tables, check its current row count with what it should be
+        // Then destroy/rebuild it if those numbers don't match
+        for (int i = 0; i < targetTables.length; i++)
+        {
+            if (getNumRowsInTable(targetTables[i]) !=
+                schemaServer.serveTable(targetTables[i]).numRows())
+            {
+                clearTable(targetTables[i]);
+                repopulateTable(targetTables[i]);
+            }
+        }
+    }
+
+    // Clear a table's contents based on name
+    public void clearTable(String tableName)
+    {
+        open();
+        database.delete(tableName, null, null);
+        close();
+    }
+
+    // Repopulate a table based on name
+    public void repopulateTable(String tableName)
+    {
+        open();
+        Schema mrTable = schemaServer.serveTable(tableName);
+        String[] Inserts = mrTable.insertStatements();
+
+        if (Inserts != null)
+        {
+            // Run each of the table's inserts
+            for (int j = 0; j < Inserts.length; j++)
+            {
+                database.execSQL(Inserts[j]);
+            }
+        }
+        close();
+    }
+
+    // Return the number of tuples in a certain table. This number may be outdated
+    public int getNumRowsInTable(String tableName)
+    {
+        open();
+        int numRows = 0;
+        String query = "SELECT COUNT(*) FROM " + tableName + ";";
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.getCount() == 0)
+        {
+            System.out.println("Table not found.");
+        }
+        else
+        {
+            cursor.moveToNext();
+            numRows = cursor.getInt(0);
+        }
+        // This way, the connection to the DB is closed for sure while also freeing the cursor
+        cursor.close();
+        close();
+        return numRows;
+    }
+
+	public boolean addAnswer(int qNumi)
+    {
 		open();
-		try {
+		try
+        {
 			long ret = -1;
 			String qNum = Integer.toString(qNumi);
 			String query = "SELECT COUNT(Question_Number) FROM COMPLETION_STATUS WHERE Question_Number = \""+ qNum +"\";";
 			Cursor cursor = database.rawQuery(query, null);
 			cursor.moveToNext();
-			if (cursor.getInt(0) == 0) {
-				query = "INSERT INTO COMPLETION_STATUS VALUES ('" + qNum + "');";
+			if (cursor.getInt(0) == 0)
+            {
+				// query = "INSERT INTO COMPLETION_STATUS VALUES ('" + qNum + "');";
 				ContentValues cv = new ContentValues(1);
 				cv.put("Question_Number", qNum);
 				ret = database.insertOrThrow("COMPLETION_STATUS", null, cv);
-				System.out.println("successfully inserted query!");
 				cursor.close();
-			} else {
+			}
+            else
+            {
 				cursor.close();
-				System.out.println("answer was answered correctly before");
 			}
 			close();
 			if (ret >= 0)
-				return true;
-			else
-				return false;
-		} catch (SQLiteException e) {
+            {
+                return true;
+            }
+			return false;
+		}
+        catch (SQLiteException e)
+        {
 			close();
 			return false;
 		}
 	}
 	
-	public boolean checkAnswer(int qNumi) {
+	public boolean checkAnswer(int qNumi)
+    {
 		open();
-		try {
+		try
+        {
 			String qNum = Integer.toString(qNumi);
 			String query = "SELECT COUNT(Question_Number) FROM COMPLETION_STATUS WHERE Question_Number = \""+ qNum +"\";";
 			Cursor cursor = database.rawQuery(query, null);
 			cursor.moveToNext();
-			if(cursor.getInt(0) > 0) {
+			if(cursor.getInt(0) > 0)
+            {
 				cursor.close();
 				close();
 				return true;
-			} else {
+			}
+            else
+            {
 				cursor.close();
 				close();
 				return false;
 			}
-		} catch (SQLiteException e) {
+		}
+        catch (SQLiteException e)
+        {
 			close();
 			return false;
 		}
 	}
 	
-	public void printTable() {
-		System.out.println("inside printTable()");
+	/* public void printTable()
+    {
 		open();
 		String query = "SELECT * FROM COMPLETION_STATUS;";
 		Cursor cursor = database.rawQuery(query, null);
 		int row = cursor.getCount();
-		while (cursor.moveToNext()) {
-			for (int i = 0; i < row; i++) {
+		while (cursor.moveToNext())
+        {
+			for (int i = 0; i < row; i++)
+            {
 				System.out.println(cursor.getString(0));
 			}
 		}
 		cursor.close();
 		close();
-	}
+	} */
 
 	public ResultSet getData(String queryString)
 	{
@@ -165,5 +247,4 @@ public class MisterDataSource
 			return new ResultSet(null, null);
 		}
 	}
-	
 }

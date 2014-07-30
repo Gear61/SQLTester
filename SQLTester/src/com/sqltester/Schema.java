@@ -4,43 +4,42 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 // Represents a schema (collection of columns + names)
-// Knows how to create and populate itself
-public class Schema
-{
-	private Column[] columns;
-	private String tableName;
-	private String[][] rows;
-	private String insertionTemplate;
-	
-	public Schema (String tableName, Column[] columns, String[][] rows)
-	{
-		this.columns = columns;
-		this.tableName = tableName;
-		this.rows = rows;
-		
-		// Initialize insertionTemplate base of "INSERT INTO TABLE_NAME (COLUMNS) VALUES )"
-		insertionTemplate = "INSERT INTO " + tableName + " (";
-		for (int i = 0; i < columns.length; i++)
-		{
-			insertionTemplate += columns[i].getRowName();
-			if (i != columns.length - 1)
-			{
-				insertionTemplate += ", "; 
-			}
-		}
-		insertionTemplate += ") VALUES (";
-	}
-	
-	public String getName()
-	{
-		return tableName;
-	}
-	
-	public Column[] getColumns()
-	{
-		return columns;
-	}
-	
+// Knows how to create itself, populate itself, and give basic information about itself
+public class Schema {
+    private Column[] columns;
+    private String tableName;
+    private String[][] rows;
+    private String insertionTemplate;
+
+    public Schema(String tableName, Column[] columns, String[][] rows) {
+        this.columns = columns;
+        this.tableName = tableName;
+        this.rows = rows;
+
+        // Initialize insertionTemplate base of "INSERT INTO TABLE_NAME (COLUMNS) VALUES )"
+        insertionTemplate = "INSERT INTO " + tableName + " (";
+        for (int i = 0; i < columns.length; i++) {
+            insertionTemplate += columns[i].getRowName();
+            if (i != columns.length - 1) {
+                insertionTemplate += ", ";
+            }
+        }
+        insertionTemplate += ") VALUES (";
+    }
+
+    // Tells you its name
+    public String getName() {
+        return tableName;
+    }
+
+    // Returns columns that comprise the table
+    public Column[] getColumns() {
+        return columns;
+    }
+
+    // Returns how many rows this schema contains. This is what the number should always be
+    public int numRows() { return rows.length; }
+
 	public ArrayList<String> createSuggestions()
 	{
 		HashSet<String> noDupes = new HashSet<String>();

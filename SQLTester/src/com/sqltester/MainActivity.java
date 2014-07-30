@@ -15,12 +15,16 @@ import android.widget.AdapterView.OnItemClickListener;
 public class MainActivity extends Activity
 {
 	final Context context = this;
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
+
+        MisterDataSource m_dataSource = new MisterDataSource(context);
+        m_dataSource.refreshTables();
+
 		// Populate the list, attach adapter to it
 		setContentView(R.layout.question_list);
 		final ListView questionList = (ListView) findViewById(R.id.questionList);

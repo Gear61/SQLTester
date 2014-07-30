@@ -13,7 +13,15 @@ public class RowServer
         									{"Yang", "Anthropology", "120000"},
         									{"Kreger", "Political Science", "190000"},
         									{"Saverin", "Political Science", "90000"},
-        									{"Depp", "Political Science", "70000"}}
+        									{"Chen", "Electrical Engineering", "125000"},
+                                            {"White", "Management", "150000"},
+                                            {"Calderon", "Journalism", "200000"},
+                                            {"Lee", "Computer Science", "250000"},
+                                            {"Jacob", "Biology", "175000"},
+                                            {"Ng", "Sociology", "50000"},
+                                            {"Hsieh", "Chemical Engineering", "400000"},
+                                            {"Muniain", "Spanish", "160000"},
+                                            {"Guerin", "Management", "500000"}}
 									   };
 	
 	public static String[][] getRows(int tableNum)
