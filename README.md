@@ -19,4 +19,4 @@ NOTE: After creating a table, it needs data, even if it should start off with no
 
 Go to RowServer.java, and look for the 3-dimensional array of strings named rows (each tuple is an array, each table is an array of tuples, and the structure as a whole is an array of tables). If you're adding data to an existing table, find its data by position (as always) and add to it. If you're adding data for a new table, add another 2-D array of strings to the mix.
 
-In the end, this is all very easy; you just need to get used to the formatting. Start off by adding really simple questions, answers, and tables and messing around with the app afterwards to see what interacts with what. Changing data is very similar to adding data; in the end, the epxerience should be very intuitive.
+In the end, this is all very easy; you just need to get used to the formatting. Start off by adding really simple questions, answers, and tables and messing around with the app afterwards to see what interacts with what. Changing data is very similar to adding data; in the end, the experience should be very intuitive.
