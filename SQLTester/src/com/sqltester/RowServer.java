@@ -45,10 +45,23 @@ public class RowServer
                                             {{"9024", "Acting for Dummies", "Nicolas Cage"},
                                              {"3492", "Euro Training for Dummies", "Terry Crews"},
                                              {"2122", "To Kill a Mockingbird", "Harper Lee"},
-                                             {"9001", "Achieving Super Saiyan", "Goku"},
-                                             {"0022", "Harry Potter and the Sorcerer's Stone", "JK Rowling"},
+                                             {"9001", "Achieving Super Saiyan", "Terry Crews"},
+                                             {"0022", "How to be a Charger", "Terry Crews"},
                                              {"3999", "The Art of Learning", "Josh Waitzkin"},
-                                             {"1243", "Pro Sniping 3", "Tony Kampy"}}
+                                             {"8743", "How to be a Sweet Cop", "Terry Crews"},
+                                             {"3422", "IEOR - Master Level", "John Buckingham"},
+                                             {"3242", "42 Wonderful Spaghetti Recipes", "Merm"},
+                                             {"2394", "Game of Thrones: Book 1", "George R.R. Martin"},
+                                             {"1243", "Pro Sniping 3", "Tony Kampy"},
+                                             {"9240", "War and Peace", "Some Dude"},
+                                             {"9211", "1984", "George Orwell"},
+                                             {"4923", "Animal Farm", "George Orwell"},
+                                             {"3923", "Jane Eyre", "Jane Smith"},
+                                             {"5929", "Invisible Man", "Barack Obama"},
+                                             {"2302", "Memories from the Navy Feel Team", "Sergeant McFeelz"},
+                                             {"3824", "Going HAM for Derps", "A Cool Dude"},
+                                             {"8141", "I Don't Read Much", "Developer of this App"}
+                                            }
 
 									   };
 	

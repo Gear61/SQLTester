@@ -87,9 +87,6 @@ public class QuestionActivity extends Activity
 	// Sets up a question given the number
 	private void setUpQuestion()
 	{
-		// Clear contents if we're coming here from a different question
-        queryHelper.setText("");
-
 		// Set up simple title
 		questionNumber.setText("Question #" + String.valueOf(currentQuestion + 1));
 
@@ -146,7 +143,11 @@ public class QuestionActivity extends Activity
                     currentQuestion = numQuestions - 1;
                 }
 				setUpQuestion();
-				break;
+
+                // Clear contents if we're coming here from a different question
+                queryHelper.setText("");
+
+                break;
 			case R.id.forward:
 				currentQuestion++;
                 if (currentQuestion == numQuestions)
@@ -154,7 +155,11 @@ public class QuestionActivity extends Activity
                     currentQuestion = 0;
                 }
 				setUpQuestion();
-				break;
+
+                // Clear contents if we're coming here from a different question
+                queryHelper.setText("");
+
+                break;
 			default:
 				break;
 		}
