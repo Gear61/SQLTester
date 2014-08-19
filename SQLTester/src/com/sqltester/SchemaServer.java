@@ -9,7 +9,7 @@ public class SchemaServer {
 
     // Hardcoded table names + columns here
     // TABLE NAMES
-    private String[] tableNames = {"COMPLETION_STATUS", "SALARIES", "CHECKED_OUT", "BOOKS"};
+    private String[] tableNames = {"COMPLETION_STATUS", "SALARIES", "CHECKED_OUT", "BOOKS", "STUDENTS", "CLASSES"};
 
     // PERSISTENT TABLE NAMES (THOSE THAT ARE NEVER "RENEWED")
     private String[] persistentNames = {"COMPLETION_STATUS"};
@@ -18,23 +18,40 @@ public class SchemaServer {
     private Column[][] tableColumns =
             {
                     {
-                            new Column("Question_Number", "TEXT"),
+                            new Column("Question_Number", "TEXT")
                     },
-                    {
+
+                    {       /* SALARIES*/
                             new Column("Professor_Name", "TEXT"),
                             new Column("Department", "TEXT"),
                             new Column("Salary", "INT")
                     },
-                    {
+
+                    {       /* CHECKED_OUT*/
                             new Column("First_Name", "TEXT"),
                             new Column("Last_Name", "TEXT"),
                             new Column("Book_ID", "INT")
                     },
-                    {
+
+                    {       /*  BOOKS */
                             new Column("Book_ID", "INT"),
                             new Column("Book_Name", "TEXT"),
                             new Column("Author", "TEXT")
+                    },
+
+                    {       // STUDENTS
+                            new Column("SID", "INT"),
+                            new Column("First", "TEXT"),
+                            new Column("Last", "TEXT")
+                    },
+                    {       // CLASSES
+                            new Column("Department", "TEXT"),
+                            new Column("CID", "INT"),
+                            new Column("SID", "INT"),
+                            new Column("Teacher", "TEXT")
                     }
+
+
             };
 
     // Array of all our schemas
@@ -99,8 +116,8 @@ public class SchemaServer {
     // Serve all non-persistent table names (presumably so they can be updated)
     public String[] serveNPTableNames()
     {
-        Set<String> TableNamesSet = new HashSet(Arrays.asList(tableNames));
-        Set<String> persistentNamesSet = new HashSet(Arrays.asList(persistentNames));
+        Set<String> TableNamesSet = new HashSet<String>(Arrays.asList(tableNames));
+        Set<String> persistentNamesSet = new HashSet<String>(Arrays.asList(persistentNames));
 
         String[] NPTables = {};
         TableNamesSet.removeAll(persistentNamesSet);

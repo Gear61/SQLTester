@@ -61,9 +61,36 @@ public class RowServer
                                              {"2302", "Memories from the Navy Feel Team", "Sergeant McFeelz"},
                                              {"3824", "Going HAM for Derps", "A Cool Dude"},
                                              {"8141", "I Don't Read Much", "Developer of this App"}
-                                            }
+                                            },
 
-									   };
+
+                                          // STUDENTS (SID FIRST LAST)
+                                         { {"777", "Joe", "Biden"},
+                                            {"674", "Abbie", "Collins"},
+                                            {"213", "Casper", "Ze Ghost"},
+                                            {"789", "Derp", "Derpington"},
+                                            {"123", "MEESTER", "DOOP"},
+                                            {"003", "Nicholas", "Cage"},
+                                            {"778", "Barack", "Obama"},
+                                                 {"001","Mysterion","McKormick"}
+                                         },
+
+                                        // CLASSES (Dep CID SID Teacher)
+                                        {   {"Computer Science", "111", "003" ,"Eggert"},
+                                            {"Economics", "101", "777" ,"John"},
+                                            {"Electrical Engineering", "161", "674" ,"Chen"},
+                                            {"Economics", "213", "213" ,"John"},
+                                            {"Computer Science", "143", "789" ,"Zanolio"},
+                                            {"Computer Science", "131", "123" ,"Eggert"},
+                                            {"Computer Science", "130", "777" ,"Eggert"},
+                                            {"Biology", "144", "213" ,"Jacob"},
+                                            {"Biology", "187", "213" ,"Jacob"}
+
+
+                                        }
+
+
+    };
 	
 	public static String[][] getRows(int tableNum)
 	{

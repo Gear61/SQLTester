@@ -23,7 +23,13 @@ public class QuestionServer
          {1},
          {2},
          {2, 3},
-         {2, 3}};
+         {2, 3},
+            {3},
+            {5},
+            {4,5},
+            {4,5},
+                {1,5}
+         };
 
 	// Questions stored here in this ghetto hard-coded array
 	private static String[] questions =
@@ -44,7 +50,15 @@ public class QuestionServer
          "Write a query that returns the third highest salary in the table.",
          "Write a query that returns all people who share their last name with somebody else.",
          "Write a query that returns the first and last name of all people who have checked out a book by Terry Crews.",
-         "Write a query that returns all the books that haven't been checked out."};
+         "Write a query that returns all the books that haven't been checked out.",
+     //    "Write a query that returns all people who checked out books whose last name similar to a professor's name.",
+
+          "Write a query that returns all books whose author's name contains the word 'Crew'.",
+         "Query to obtain the teacher who teaches the most classes (name and how many he teaches)",
+         "Query to obtain the student with the most classes enrolled",
+         "Query to return student with no classes enrolled",
+         "Query to return all Professors that are not teaching any classes"
+        };
 
     private Question[] allQuestions = new Question[questions.length];
 
