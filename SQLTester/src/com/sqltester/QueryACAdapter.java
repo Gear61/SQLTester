@@ -43,7 +43,7 @@ public class QueryACAdapter extends ArrayAdapter<String>
     	this.context = context;
     	this.userQuery = userQuery;
     	this.currentSchemas = currentSchemas;
-    	
+
     	setUpAC();
     	setProgressTracker();
     	addConstants();

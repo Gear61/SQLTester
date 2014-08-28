@@ -27,4 +27,9 @@
     <string name="app_name">SQL Practice</string>
     <string name="action_settings">Settings</string>
 
+
+    <!-- my additions -->
+    <string name = "test_bed"> Try Test Bench</string>
+    <string name = "instructions">Welcome to SQL Tester! Test out a query or answer some questions!</string>
+
 </resources>

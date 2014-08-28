@@ -5,15 +5,16 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="15"
+        android:targetSdkVersion="19"
+        />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/sql_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
+
         <activity
             android:name="com.sqltester.MainActivity"
             android:label="@string/app_name" >
@@ -23,19 +24,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <activity
-	        android:name="com.sqltester.QuestionActivity"
-	        android:label="@string/question_activity_display_message"
-	        android:parentActivityName="com.sqltester.MainActivity" >
-    	</activity>
-        
+            android:name="com.sqltester.QuestionActivity"
+            android:label="@string/question_activity_display_message"
+            android:parentActivityName="com.sqltester.QuestionListActivity" >
+        </activity>
+
         <activity
-	        android:name="com.sqltester.AnswerCheckerActivity"
-	        android:label="@string/answer_checker_activity_display_message"
-	        android:parentActivityName="com.sqltester.QuestionActivity" >
-    	</activity>
-        
+            android:name="com.sqltester.AnswerCheckerActivity"
+            android:label="@string/answer_checker_activity_display_message"
+            android:parentActivityName="com.sqltester.QuestionActivity" >
+        </activity>
+
+        <activity
+            android:name="com.sqltester.QuestionListActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.sqltester.MainActivity" >
+
+        </activity>
+
+        <activity
+            android:name="com.sqltester.TestBedActivity"
+            android:label="Query Testing/Practice"
+            android:parentActivityName="com.sqltester.MainActivity" >
+        </activity>
+
+        <activity
+            android:name="com.sqltester.TestAnswerActivity"
+            android:label="Test Answer"
+            android:parentActivityName="com.sqltester.TestBedActivity">
+
+        </activity>
+
+
     </application>
 
 </manifest>

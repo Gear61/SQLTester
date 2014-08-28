@@ -19,7 +19,7 @@ public class QuestionActivity extends Activity
 {
 	final Context context = this;
 	SchemaServer m_SS = SchemaServer.getSchemaServer();
-    QuestionServer m_QS = QuestionServer.getQuestionServer();
+    QuestionServer m_QS = null;
 	int currentQuestion;
 	String queryPreSet;
 
@@ -59,6 +59,8 @@ public class QuestionActivity extends Activity
 		Intent intent = getIntent();
 		currentQuestion = intent.getIntExtra("QUESTION_NUM", 0);
 
+        m_QS = QuestionServer.getQuestionServer();
+
 		questionNumber = (TextView) findViewById(R.id.question_number);
 		tableDesign = (TextView) findViewById(R.id.table_design);
 		questionPrompt = (TextView) findViewById(R.id.problem);
@@ -67,6 +69,11 @@ public class QuestionActivity extends Activity
 
 		setUpQuestion();
 	}
+
+    protected void activityOnCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+    }
 
 	public void checkAnswer(View view)
 	{

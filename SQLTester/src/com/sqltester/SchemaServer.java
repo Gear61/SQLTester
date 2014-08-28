@@ -56,6 +56,8 @@ public class SchemaServer {
 
     // Array of all our schemas
     private Schema[] allSchemas = new Schema[tableNames.length];
+    private ArrayList<String> allDescriptions = new ArrayList<String>();
+    private Schema[] validSqlTables = new Schema[tableNames.length-1];
 
     public static SchemaServer getSchemaServer()
     {
@@ -70,6 +72,10 @@ public class SchemaServer {
         for (int i = 0; i < tableNames.length; i++)
         {
             allSchemas[i] = new Schema(tableNames[i], tableColumns[i], RowServer.getRows(i));
+            if (i>0) {
+                allDescriptions.add(allSchemas[i].description());
+                validSqlTables[i-1] = allSchemas[i];
+            }
         }
     }
 
@@ -108,10 +114,16 @@ public class SchemaServer {
         return allSchemas;
     }
 
+    public ArrayList<String> serveAllDescriptions (){
+
+        return allDescriptions;
+    }
+
     public String[] serveAllTableNames()
     {
         return tableNames;
     }
+    public Schema[] allValidTables() { return validSqlTables;}
 
     // Serve all non-persistent table names (presumably so they can be updated)
     public String[] serveNPTableNames()

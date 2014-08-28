@@ -11,6 +11,7 @@ public class AnswerChecker
 	public AnswerChecker(Context context)
 	{
 		dataSource = new MisterDataSource(context);
+        dataSource.refreshTables();
 	}
 
 	public ResponseBundle checkAnswer(int questionNumber, String userQuery)

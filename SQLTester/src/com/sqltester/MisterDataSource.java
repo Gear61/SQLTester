@@ -175,6 +175,7 @@ public class MisterDataSource {
 			close();
 			return false;
 		}
+
 	}
 	
 	public boolean checkAnswer(int qNumi)
@@ -288,6 +289,7 @@ public class MisterDataSource {
     	}
 		catch (SQLiteException e)
 		{
+            close();
 			return new ResultSet(null, null);
 		}
 	}
