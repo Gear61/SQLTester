@@ -1,0 +1,71 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/greeting_text"
+            android:layout_margin="10dp"
+            android:text="Here is the result of running the query:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/user_query"
+            android:layout_margin="10dp"
+            android:layout_below="@id/greeting_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/their_answers"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/user_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TableLayout
+            android:id="@+id/their_answers_table"
+            android:layout_below="@+id/their_answers"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="6">
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/retry_query"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="retryQuery"
+            android:text="@string/retry_question"
+            android:visibility="visible"
+            android:layout_below="@+id/their_answers_table" />
+
+        <Button
+            android:id="@+id/return_main"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/retry_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="returnToMain"
+            android:text="Go back to front page"/>
+
+    </RelativeLayout>
+</ScrollView>

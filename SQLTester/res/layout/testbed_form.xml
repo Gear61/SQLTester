@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+    <TextView
+        android:id="@+id/instr"
+        android:text="Use any of these tables for your query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/submission_form"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/instr"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/submit_query"
+            android:layout_alignBottom="@+id/query_entry"
+            android:layout_alignParentRight="true"
+            android:text="@string/submit_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="answerQuery"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/query_entry"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/submit_query"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+    <ListView
+        android:id="@+id/tableList"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/submission_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+</RelativeLayout>
+

@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/instructions"
+        android:text="@string/instructions"
+        android:textStyle="bold|italic"
+        android:textSize="28sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:inputType="none" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_bed"
+        android:id="@+id/test_bed"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/instructions"
+        android:onClick="goToTestBed"/>
+
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Single Table Questions"
+        android:id="@+id/single_type"
+        android:onClick="goToSingles"
+        android:layout_below="@+id/test_bed"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Multi-Table Questions"
+        android:id="@+id/multi_type"
+        android:onClick="goToMultis"
+        android:layout_below="@+id/single_type"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
