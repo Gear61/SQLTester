@@ -1,14 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp">
+    android:layout_height="fill_parent"
+
+    android:background="@drawable/my_gradient">
     
     <TextView
         android:id="@+id/question_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_alignParentLeft="true"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/question_number"
         android:text="@string/our_table"
+        android:textColor="@color/Green_LawnGreen"
         android:textStyle="bold" />
     
     <TextView
@@ -51,8 +52,7 @@
 	            android:layout_alignBottom="@+id/query_entry"
 	            android:layout_alignParentRight="true"
 	            android:text="@string/submit_query"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
+                style="@style/customButton2"
 	            android:onClick="checkAnswer"/>
 	        
 	        <AutoCompleteTextView
@@ -61,7 +61,10 @@
 	            android:layout_toLeftOf="@+id/submit_query"
 	            android:layout_centerVertical="true"
 	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"/>
+	            android:layout_height="wrap_content"
+                android:textColor="@color/Green_ForestGreen"
+                android:textStyle="italic"
+                android:background="@color/Blue_light"/>
 	</RelativeLayout>
  
 </RelativeLayout>

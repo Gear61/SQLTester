@@ -4,16 +4,21 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp">
+    android:layout_height="fill_parent"
+
+    android:background="@drawable/my_gradient">
 
     <TextView
         android:id="@+id/instr"
+        android:textColor="@color/Green_LawnGreen"
         android:text="Use any of these tables for your query"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/Black"
+        android:textStyle="bold"
+        android:textSize="@dimen/medium_text" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/submission_form"
@@ -27,8 +32,7 @@
             android:layout_alignBottom="@+id/query_entry"
             android:layout_alignParentRight="true"
             android:text="@string/submit_query"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/customButton2"
             android:onClick="answerQuery"/>
 
         <AutoCompleteTextView
@@ -37,7 +41,10 @@
             android:layout_toLeftOf="@+id/submit_query"
             android:layout_centerVertical="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/Green_ForestGreen"
+            android:textStyle="italic"
+            android:background="@color/Blue_light" />
     </RelativeLayout>
 
 

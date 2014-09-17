@@ -96,6 +96,7 @@ public class QuestionActivity extends Activity
 	{
 		// Set up simple title
 		questionNumber.setText("Question #" + String.valueOf(currentQuestion + 1));
+        questionNumber.setTextColor(getResources().getColor(R.color.Green_LawnGreen));
 
 		// Get descriptions of the tables we're supposed to use.
         String tableDescriptions = "";
@@ -109,10 +110,11 @@ public class QuestionActivity extends Activity
             tableDescriptions += m_SS.serveTable(relevantTables[i]).description();
         }
 		tableDesign.setText(tableDescriptions);
+        tableDesign.setTextColor(getResources().getColor(R.color.Green_LawnGreen));
 
 		// Load the problem
 		questionPrompt.setText(m_QS.getQuestion(currentQuestion).giveQuestionText());
-
+        questionPrompt.setTextColor(getResources().getColor(R.color.Green_LawnGreen));
 		// Set up Auto Complete
 		QueryACAdapter adapter = new QueryACAdapter(context, android.R.layout.simple_dropdown_item_1line,
                                                     m_SS.serveSomeTables(relevantTables), queryHelper);

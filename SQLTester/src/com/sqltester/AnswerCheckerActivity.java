@@ -60,6 +60,7 @@ public class AnswerCheckerActivity extends Activity
 			MisterDataSource updateAnswer = new MisterDataSource(context);
 			updateAnswer.addAnswer(questionNum);
 			verdict.setText("Congratulations! You got the correct answer!");
+            verdict.setTextColor(getResources().getColor(R.color.Green_GreenYellow));
 			if (questionNum != QuestionServer.getNumQuestions() - 1)
 			{
 				advance_forward.setVisibility(View.VISIBLE);
@@ -70,20 +71,24 @@ public class AnswerCheckerActivity extends Activity
 			retry.setVisibility(View.VISIBLE);
 			give_up.setVisibility(View.VISIBLE);
 			verdict.setText("Your query was incorrect. Please try again.");
+            verdict.setTextColor(getResources().getColor(R.color.Red));
 		}
 		
 		// They got it wrong
 		if (score.userResults().getData() == null)
 		{
 			their_answers.setText("Your query wasn't a valid query.");
+            their_answers.setTextColor(getResources().getColor(R.color.Red));
 		}
 		else if (score.userResults().getData().length == 0)
 		{
 			their_answers.setText("Your query didn't return anything.");
+            their_answers.setTextColor(getResources().getColor(R.color.Red));
 		}
 		else
 		{
 			their_answers.setText("Here is what your query returned.");
+            their_answers.setTextColor(getResources().getColor(R.color.Green_GreenYellow));
 			// Logic to display their table
 			createTable((TableLayout) findViewById(R.id.their_answers_table),
 						score.userResults().getColumns(), score.userResults().getData());
@@ -104,6 +109,7 @@ public class AnswerCheckerActivity extends Activity
 	        text.setText(columns[i]);
 	        text.setLayoutParams(params1);
 	        text.setTypeface(null, Typeface.BOLD);
+            text.setTextColor(getResources().getColor(R.color.Green_GreenYellow));
 	        topRow.addView(text);
 		}
 		topRow.setOrientation(LinearLayout.HORIZONTAL);
@@ -119,6 +125,7 @@ public class AnswerCheckerActivity extends Activity
 				TextView text = new TextView(this);
 		        text.setText(data[i][j]);
 		        text.setLayoutParams(params1);
+                text.setTextColor(getResources().getColor(R.color.Green_GreenYellow));
 		        tuple.addView(text);
 			}
 			tuple.setOrientation(LinearLayout.HORIZONTAL);

@@ -1,23 +1,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp">
+    android:layout_height="fill_parent"
+    android:background="@drawable/my_gradient"
+    android:id="@+id/list_layout">
+
+
     
     <TextView
         android:id="@+id/random"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="@string/welcome"
-        android:gravity="center"/>
+        android:text ="@string/welcome"
+        android:textColor="@color/Green_LawnGreen"
+        android:gravity="center"
+        android:background="@color/Black_overlay"
+        android:textSize="@dimen/medium_text"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" />
 
 	<ListView
     	android:id="@+id/questionList"
-    	android:layout_marginTop="10dp"
+
     	android:layout_below="@+id/random"
     	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"/>
+    	android:layout_height="wrap_content"
+        
+        />
  
 </RelativeLayout>

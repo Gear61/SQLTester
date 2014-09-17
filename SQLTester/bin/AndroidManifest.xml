@@ -53,7 +53,8 @@
         <activity
             android:name="com.sqltester.TestAnswerActivity"
             android:label="Test Answer"
-            android:parentActivityName="com.sqltester.TestBedActivity">
+            android:parentActivityName="com.sqltester.TestBedActivity"
+            android:theme="@style/GradientTheme">
 
             </activity>
 

@@ -29,7 +29,9 @@
 
 
     <!-- my additions -->
-    <string name = "test_bed"> Try Test Bench</string>
-    <string name = "instructions">Welcome to SQL Tester! Test out a query or answer some questions!</string>
+    <string name = "test_bed"> Sandbox Mode</string>
+    <string name = "instructions">Welcome to SQL Tester.\n Select an action:</string>
+
+
 
 </resources>

@@ -110,6 +110,7 @@ public class TestAnswerActivity extends Activity {
             text.setText(columns[i]);
             text.setLayoutParams(params1);
             text.setTypeface(null, Typeface.BOLD);
+            text.setTextColor(getResources().getColor(R.color.Green_GreenYellow));
             topRow.addView(text);
         }
         topRow.setOrientation(LinearLayout.HORIZONTAL);
@@ -125,6 +126,7 @@ public class TestAnswerActivity extends Activity {
                 TextView text = new TextView(this);
                 text.setText(data[i][j]);
                 text.setLayoutParams(params1);
+                text.setTextColor(getResources().getColor(R.color.Green_GreenYellow));
                 tuple.addView(text);
             }
             tuple.setOrientation(LinearLayout.HORIZONTAL);

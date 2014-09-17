@@ -17,4 +17,49 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+
+
+
+
+
+    <style name="customButton" parent="android:Widget.Button">
+
+        <item name="android:background">@drawable/button_icon2</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/Green_LawnGreen</item>
+        <item name="android:gravity">center</item>
+
+        <item name="android:textSize">25sp</item>
+
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+
+    </style>
+
+
+    <style name="customButton2" parent="android:Widget.Button">
+
+        <item name="android:background">@drawable/button_icon</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/White</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:textSize">15sp</item>
+
+
+    </style>
+
+    <style name="GradientTheme" parent="android:Theme">
+
+    <item name="android:windowBackground">@drawable/my_gradient</item>
+    <item name="android:colorBackgroundCacheHint">#00000000</item>
+     <item name="android:background">@drawable/my_gradient</item>
+   </style>
+
 </resources>

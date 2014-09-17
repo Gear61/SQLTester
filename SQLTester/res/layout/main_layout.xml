@@ -1,48 +1,70 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="32dp"
-    android:paddingRight="32dp" >
+    android:layout_height="match_parent"
+
+    android:id="@+id/rel2"
+    android:gravity="fill_horizontal|fill"
+
+    android:background="@drawable/my_gradient">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/instructions"
         android:text="@string/instructions"
-        android:textStyle="bold|italic"
-        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textSize="30sp"
+
+        android:gravity="top|center_horizontal"
+        android:textColor="@color/Green_LawnGreen"
+        android:background="@color/Black"
+
+        android:textColorHighlight="#ff143115"
+        android:textAlignment="center"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:inputType="none" />
+
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+        style="@style/customButton"
+
         android:text="@string/test_bed"
         android:id="@+id/test_bed"
+        android:layout_marginTop="25dp"
+        android:onClick="goToTestBed"
+        android:gravity="center_vertical|center"
+        android:textStyle="italic"
+
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/instructions"
-        android:onClick="goToTestBed"/>
+      />
 
 
 
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+        style="@style/customButton"
+
         android:text="Single Table Questions"
         android:id="@+id/single_type"
         android:onClick="goToSingles"
-        android:layout_below="@+id/test_bed"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@id/test_bed"
+        android:layout_marginTop="15dp"
+        android:textStyle="italic"
+
+
+    />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+        style="@style/customButton"
+
         android:text="Multi-Table Questions"
         android:id="@+id/multi_type"
         android:onClick="goToMultis"
+        android:textStyle="italic"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/single_type"
-        android:layout_centerHorizontal="true" />
+        />
 </RelativeLayout>

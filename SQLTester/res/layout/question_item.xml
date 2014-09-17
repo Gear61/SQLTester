@@ -14,6 +14,7 @@ question before. -->
     <ImageView
         android:id="@+id/completion_status"
         android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:layout_alignParentRight="true"
 	    android:layout_width="wrap_content"
 	    android:layout_height="match_parent"
@@ -33,7 +34,8 @@ question before. -->
 	        android:layout_height="wrap_content"
 	        android:gravity="center_vertical"
 	        android:textSize="18sp"
-	        android:textColor="#000"/>
+	        android:textColor="@color/Green_LawnGreen"
+            android:textStyle="bold" />
 	    
     </LinearLayout>
 
