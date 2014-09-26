@@ -67,4 +67,16 @@
         android:layout_marginTop="15dp"
         android:layout_below="@+id/single_type"
         />
+
+    <Button
+        style = "@style/customButton2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/feedback"
+        android:text = "Got Feedback?"
+        android:textStyle="bold"
+        android:onClick="openEmail"
+        />
+
+
 </RelativeLayout>

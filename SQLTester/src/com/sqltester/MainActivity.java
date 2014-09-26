@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.text.Html;
+import android.net.Uri;
 
 public class MainActivity extends Activity
 {
@@ -33,6 +35,8 @@ public class MainActivity extends Activity
         test_bed =      (Button) findViewById(R.id.test_bed);
         single = (Button) findViewById(R.id.single_type);
         multi = (Button) findViewById(R.id.multi_type);
+
+        BackgroundValue.getBackgroundValue();
     }
 
 
@@ -57,6 +61,19 @@ public class MainActivity extends Activity
         intent.putExtra("TYPE", "MULTI");
         MainActivity.this.finish();
         context.startActivity(intent);
+    }
+
+    public void openEmail (View view){
+        String appEmail = "place@holder.com";
+        String subject = "Comments/Suggestions for SQL Tester";
+        String body = "";
+
+        String URI="mailto:" + appEmail + "?subject=" + subject + "&body=" + body;
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri data = Uri.parse(URI);
+        intent.setData(data);
+        startActivity(intent);
     }
 
 }

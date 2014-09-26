@@ -32,6 +32,8 @@
     <string name = "test_bed"> Sandbox Mode</string>
     <string name = "instructions">Welcome to SQL Tester.\n Select an action:</string>
 
+    <string name = "background">Change Background</string>
+
 
 
 </resources>
